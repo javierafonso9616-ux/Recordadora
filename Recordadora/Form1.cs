@@ -17,9 +17,12 @@ namespace Recordadora
             } */
 
             InitializeComponent();
-            // 1. Inicializar el Manager
 
 
+            this.Padding = new Padding(3, 70, 3, 3);
+            this.Text = "                                                            " +
+                        "                                                            " +
+                        "                                                  RECORDADORA";
             this.WindowState = FormWindowState.Maximized;
         }
 
