@@ -76,12 +76,23 @@ namespace Recordadora
             dataGridView1.ColumnHeadersHeight = 40;
 
             dataGridView1.DefaultCellStyle.Font = new Font("Segoe UI", 10);
-            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect; // Permite seleccionar toda la fila al hacer clic en cualquier celda
             dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(245, 245, 245);
 
-            dataGridView1.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-            dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridView1.RowHeadersVisible = false;
+            dataGridView1.DefaultCellStyle.WrapMode = DataGridViewTriState.True; // Permite que el texto se ajuste a varias líneas si es necesario
+            dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells; // Ajusta la altura de las filas automáticamente según el contenido
+            dataGridView1.RowHeadersVisible = false; // Oculta la columna de encabezado de filas
+
+            // --- BLOQUEO DE EDICIÓN ---
+            dataGridView1.ReadOnly = true; // Impide editar el texto de las celdas
+            dataGridView1.AllowUserToAddRows = false; // Quita la fila en blanco del final
+            dataGridView1.AllowUserToDeleteRows = false; // Impide borrar pulsando la tecla 'Supr'
+
+            // --- OCULTAR EL ID ---
+            if (dataGridView1.Columns.Contains("ID"))
+            {
+                dataGridView1.Columns["ID"].Visible = false;
+            }
 
             // Ajuste de columnas
             if (dataGridView1.Columns.Contains("DESCRIPCION")) dataGridView1.Columns["DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -100,7 +111,7 @@ namespace Recordadora
         {
             // 1. Nos traemos TODO de la base de datos (SIN EL WHERE).
             // Así la tabla interna en memoria tendrá el histórico completo y el calendario podrá buscar por cualquier mes.
-            string consulta = "SELECT FECHA, TITULO, DESCRIPCION, SOLUCION, ESTADO FROM TABLA_RECORDADORA";
+            string consulta = "SELECT ID, FECHA, TITULO, DESCRIPCION, SOLUCION, ESTADO FROM TABLA_RECORDADORA";
 
             DataTable dt = ad.ObtenerDatos(consulta);
 
@@ -217,15 +228,47 @@ namespace Recordadora
                 // Si el buscador está vacío (el usuario ha borrado el texto)
                 if (string.IsNullOrEmpty(busqueda))
                 {
-                    // Volvemos a la vista normal (por ejemplo, recargando los filtros de hoy)
+                    // Volvemos a la vista normal (recargando los filtros de hoy)
                     CargarDatos();
                 }
                 else
                 {
-                    // Filtramos DIRECTAMENTE EN MEMORIA. Es fulminante y no toca la base de datos.
-                    // Al usar LIKE, ponemos el texto entre '% %' para que busque coincidencias parciales.
+                    // Filtro
+
                     dv.RowFilter = string.Format("TITULO LIKE '%{0}%' OR DESCRIPCION LIKE '%{0}%' OR SOLUCION LIKE '%{0}%'", busqueda);
                 }
+            }
+        }
+
+        // DOBLE CLICK CELDA: ABRIR FORMULARIO DE EDICIÓN (POR HACER)
+
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Verificamos que no hayan hecho clic en la cabecera de las columnas (eso sería el índice -1)
+            if (e.RowIndex >= 0)
+            {
+                // 1. Pillamos la fila completa que el usuario ha clicado
+                DataGridViewRow fila = dataGridView1.Rows[e.RowIndex];
+
+                // 2. Extraemos todos los datos usando el nombre de la columna en la BD
+                // Usamos '?.' y '?? ""' por si algún campo (como la solución) estuviera nulo en la BD
+                int idTarea = Convert.ToInt32(fila.Cells["ID"].Value);
+                DateTime fecha = Convert.ToDateTime(fila.Cells["FECHA"].Value);
+                string titulo = fila.Cells["TITULO"].Value?.ToString() ?? "";
+                string descripcion = fila.Cells["DESCRIPCION"].Value?.ToString() ?? "";
+                string solucion = fila.Cells["SOLUCION"].Value?.ToString() ?? "";
+                string estado = fila.Cells["ESTADO"].Value?.ToString() ?? "";
+
+                // Abrimos el formulario pasándole todos los datos de la fila
+                FormEdicion frm = new FormEdicion(idTarea, fecha, titulo, descripcion, solucion, estado);
+
+                // ShowDialog hace que el formulario se abra por encima y bloquee el principal hasta que se cierre
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    // Si cerramos el formulario dándole a Guardar (DialogResult.OK), recargamos el Grid
+                    CargarDatos();
+                }
+
             }
         }
     }
