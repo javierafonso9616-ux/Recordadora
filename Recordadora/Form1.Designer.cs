@@ -70,7 +70,6 @@
             this.mcCalendario.Name = "mcCalendario";
             this.mcCalendario.TabIndex = 8;
             this.mcCalendario.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.mcCalendario_DateChanged);
-       
             this.mcCalendario.MouseUp += new System.Windows.Forms.MouseEventHandler(this.mcCalendario_MouseUp);
             // 
             // lbEstado
@@ -155,6 +154,7 @@
             this.txtBuscar.TrailingIcon = null;
             this.txtBuscar.UseAccent = false;
             this.txtBuscar.UseSystemPasswordChar = false;
+            this.txtBuscar.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged);
             // 
             // pictureBoxLogo
             // 

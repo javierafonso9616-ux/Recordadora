@@ -51,6 +51,7 @@ namespace Recordadora
         }
 
         // --- CONFIGURACIÓN ---
+        //--- CONFIGURAR CALENDARIO ---
         private void ConfigurarCalendar()
         {
             mcCalendario.TitleBackColor = Color.FromArgb(13, 71, 161); // Blue900
@@ -59,6 +60,7 @@ namespace Recordadora
             mcCalendario.Font = new Font("Segoe UI", 15F, FontStyle.Regular);
         }
 
+        //--- CONFIGURAR GRID ---
         public void ConfigurarGrid()
         {
             Color azulOscuro = Color.FromArgb(13, 71, 161);
@@ -93,25 +95,37 @@ namespace Recordadora
             }
         }
 
+        //--- CARGAR DATOS ---
         public void CargarDatos()
         {
+            // 1. Nos traemos TODO de la base de datos (SIN EL WHERE).
+            // Así la tabla interna en memoria tendrá el histórico completo y el calendario podrá buscar por cualquier mes.
             string consulta = "SELECT FECHA, TITULO, DESCRIPCION, SOLUCION, ESTADO FROM TABLA_RECORDADORA";
+
             DataTable dt = ad.ObtenerDatos(consulta);
 
             if (dt != null)
             {
                 dataGridView1.DataSource = dt;
                 ConfigurarGrid();
+
                 foreach (DataGridViewColumn column in dataGridView1.Columns)
                 {
                     column.MinimumWidth = 100;
                 }
+
+                // 2. APLICAMOS EL FILTRO VISUAL INICIAL (SOLO HOY)
+                // Usamos la misma lógica que el calendario, ocultando todo lo que no sea de hoy
+                string hoy = DateTime.Now.ToString("yyyy-MM-dd");
+                string manana = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
+
+                dt.DefaultView.RowFilter = string.Format("FECHA >= '{0}' AND FECHA < '{1}'", hoy, manana);
             }
         }
 
         // --- EVENTOS DE FILTRADO ---
 
-        // UNIFICADO: Gestiona tanto el clic en un día como la navegación por meses con "memoria"
+        // Gestiona tanto el clic en un día como la navegación por meses 
         private void mcCalendario_DateChanged(object sender, DateRangeEventArgs e)
         {
             if (dataGridView1.DataSource is DataTable dt)
@@ -193,5 +207,26 @@ namespace Recordadora
             }
         }
 
+        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        {
+            if (dataGridView1.DataSource is DataTable dt)
+            {
+                DataView dv = dt.DefaultView;
+                string busqueda = txtBuscar.Text.Trim();
+
+                // Si el buscador está vacío (el usuario ha borrado el texto)
+                if (string.IsNullOrEmpty(busqueda))
+                {
+                    // Volvemos a la vista normal (por ejemplo, recargando los filtros de hoy)
+                    CargarDatos();
+                }
+                else
+                {
+                    // Filtramos DIRECTAMENTE EN MEMORIA. Es fulminante y no toca la base de datos.
+                    // Al usar LIKE, ponemos el texto entre '% %' para que busque coincidencias parciales.
+                    dv.RowFilter = string.Format("TITULO LIKE '%{0}%' OR DESCRIPCION LIKE '%{0}%' OR SOLUCION LIKE '%{0}%'", busqueda);
+                }
+            }
+        }
     }
 }
