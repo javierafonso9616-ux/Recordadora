@@ -63,11 +63,15 @@ namespace Recordadora
 
         private void configurarCalendario()
         {
-            dtCalendario.MinDate = new System.DateTime(2000, 1, 1);
-            dtCalendario.Format = DateTimePickerFormat.Custom;
-            dtCalendario.CustomFormat = "dd/MM/yyyy";
-            dtCalendario.
 
+            mcCalendario.TitleBackColor = Color.FromArgb(13, 71, 161);
+            mcCalendario.TitleForeColor = Color.White;
+            mcCalendario.TrailingForeColor = Color.Silver;
+            mcCalendario.ShowTodayCircle = false;
+            mcCalendario.ShowToday = false;
+
+
+            mcCalendario.Padding = new Padding(5);
         }
 
 
