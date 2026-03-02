@@ -20,9 +20,9 @@ namespace Recordadora
 
             this.Padding = new Padding(20, 80, 20, 20);
 
-            // Título centrado (la famosa "gochada")
-            this.Text = "                                                                            " +
-                        "                                                                            " +
+            // Gochada para centrar el titulo
+            this.Text = "                                                             " +
+                        "                                                             " +
                         "                                                   RECORDADORA";
 
             var materialSkinManager = MaterialSkinManager.Instance;
