@@ -2,9 +2,9 @@
 
 namespace Recordadora
 {
-    public partial class Logo : MaterialForm
+    public partial class FormLogo : MaterialForm
     {
-        public Logo()
+        public FormLogo()
         {
             InitializeComponent();
 

@@ -1,6 +1,6 @@
 ﻿namespace Recordadora
 {
-    partial class Logo
+    partial class FormLogo
     {
         /// <summary>
         /// Required designer variable.

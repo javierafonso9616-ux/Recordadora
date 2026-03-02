@@ -30,29 +30,27 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.materialCardMenu = new MaterialSkin.Controls.MaterialCard();
-            this.materialCardDataGrid = new MaterialSkin.Controls.MaterialCard();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.materialComboBox1 = new MaterialSkin.Controls.MaterialComboBox();
-            this.btnAñadir = new MaterialSkin.Controls.MaterialFloatingActionButton();
-            this.txtBuscar = new MaterialSkin.Controls.MaterialTextBox2();
-            this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
             this.mcCalendario = new System.Windows.Forms.MonthCalendar();
             this.lbEstado = new MaterialSkin.Controls.MaterialLabel();
-            this.mCard = new MaterialSkin.Controls.MaterialCard();
+            this.btnAñadir = new MaterialSkin.Controls.MaterialFloatingActionButton();
+            this.cbEstado = new MaterialSkin.Controls.MaterialComboBox();
+            this.txtBuscar = new MaterialSkin.Controls.MaterialTextBox2();
+            this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
+            this.materialCardDataGrid = new MaterialSkin.Controls.MaterialCard();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.materialCardMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
             this.materialCardDataGrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
-            this.mCard.SuspendLayout();
             this.SuspendLayout();
             // 
             // materialCardMenu
             // 
             this.materialCardMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.materialCardMenu.Controls.Add(this.mCard);
+            this.materialCardMenu.Controls.Add(this.mcCalendario);
             this.materialCardMenu.Controls.Add(this.lbEstado);
             this.materialCardMenu.Controls.Add(this.btnAñadir);
-            this.materialCardMenu.Controls.Add(this.materialComboBox1);
+            this.materialCardMenu.Controls.Add(this.cbEstado);
             this.materialCardMenu.Controls.Add(this.txtBuscar);
             this.materialCardMenu.Controls.Add(this.pictureBoxLogo);
             this.materialCardMenu.Depth = 0;
@@ -63,64 +61,29 @@
             this.materialCardMenu.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCardMenu.Name = "materialCardMenu";
             this.materialCardMenu.Padding = new System.Windows.Forms.Padding(14);
-            this.materialCardMenu.Size = new System.Drawing.Size(1911, 181);
+            this.materialCardMenu.Size = new System.Drawing.Size(1911, 206);
             this.materialCardMenu.TabIndex = 0;
             // 
-            // materialCardDataGrid
+            // mcCalendario
             // 
-            this.materialCardDataGrid.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.materialCardDataGrid.Controls.Add(this.dataGridView1);
-            this.materialCardDataGrid.Depth = 0;
-            this.materialCardDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.materialCardDataGrid.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialCardDataGrid.Location = new System.Drawing.Point(3, 245);
-            this.materialCardDataGrid.Margin = new System.Windows.Forms.Padding(14);
-            this.materialCardDataGrid.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialCardDataGrid.Name = "materialCardDataGrid";
-            this.materialCardDataGrid.Padding = new System.Windows.Forms.Padding(14);
-            this.materialCardDataGrid.Size = new System.Drawing.Size(1911, 829);
-            this.materialCardDataGrid.TabIndex = 1;
+            this.mcCalendario.Location = new System.Drawing.Point(1338, 21);
+            this.mcCalendario.Name = "mcCalendario";
+            this.mcCalendario.TabIndex = 8;
+            this.mcCalendario.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.mcCalendario_DateChanged);
+            this.mcCalendario.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.mcCalendario_DateSelected);
+            this.mcCalendario.MouseUp += new System.Windows.Forms.MouseEventHandler(this.mcCalendario_MouseUp);
             // 
-            // dataGridView1
+            // lbEstado
             // 
-            this.dataGridView1.AllowUserToOrderColumns = true;
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.EnableHeadersVisualStyles = false;
-            this.dataGridView1.Location = new System.Drawing.Point(14, 14);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(1883, 801);
-            this.dataGridView1.TabIndex = 1;
-            // 
-            // materialComboBox1
-            // 
-            this.materialComboBox1.AutoResize = false;
-            this.materialComboBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.materialComboBox1.Depth = 0;
-            this.materialComboBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.materialComboBox1.DropDownHeight = 174;
-            this.materialComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.materialComboBox1.DropDownWidth = 121;
-            this.materialComboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this.materialComboBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialComboBox1.FormattingEnabled = true;
-            this.materialComboBox1.IntegralHeight = false;
-            this.materialComboBox1.ItemHeight = 43;
-            this.materialComboBox1.Items.AddRange(new object[] {
-            "(Seleccione un estado)",
-            "PENDIENTE",
-            "REALIZADO",
-            "CANCELADO"});
-            this.materialComboBox1.Location = new System.Drawing.Point(1621, 63);
-            this.materialComboBox1.MaxDropDownItems = 4;
-            this.materialComboBox1.MouseState = MaterialSkin.MouseState.OUT;
-            this.materialComboBox1.Name = "materialComboBox1";
-            this.materialComboBox1.Size = new System.Drawing.Size(220, 49);
-            this.materialComboBox1.StartIndex = 0;
-            this.materialComboBox1.TabIndex = 3;
+            this.lbEstado.AutoSize = true;
+            this.lbEstado.Depth = 0;
+            this.lbEstado.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lbEstado.Location = new System.Drawing.Point(1624, 30);
+            this.lbEstado.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lbEstado.Name = "lbEstado";
+            this.lbEstado.Size = new System.Drawing.Size(50, 19);
+            this.lbEstado.TabIndex = 7;
+            this.lbEstado.Text = "Estado";
             // 
             // btnAñadir
             // 
@@ -134,6 +97,34 @@
             this.btnAñadir.Size = new System.Drawing.Size(56, 56);
             this.btnAñadir.TabIndex = 4;
             this.btnAñadir.UseVisualStyleBackColor = false;
+            // 
+            // cbEstado
+            // 
+            this.cbEstado.AutoResize = false;
+            this.cbEstado.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.cbEstado.Depth = 0;
+            this.cbEstado.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cbEstado.DropDownHeight = 174;
+            this.cbEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbEstado.DropDownWidth = 121;
+            this.cbEstado.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.cbEstado.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.cbEstado.FormattingEnabled = true;
+            this.cbEstado.IntegralHeight = false;
+            this.cbEstado.ItemHeight = 43;
+            this.cbEstado.Items.AddRange(new object[] {
+            "(Seleccione un estado)",
+            "PENDIENTE",
+            "REALIZADO",
+            "CANCELADO"});
+            this.cbEstado.Location = new System.Drawing.Point(1621, 63);
+            this.cbEstado.MaxDropDownItems = 4;
+            this.cbEstado.MouseState = MaterialSkin.MouseState.OUT;
+            this.cbEstado.Name = "cbEstado";
+            this.cbEstado.Size = new System.Drawing.Size(220, 49);
+            this.cbEstado.StartIndex = 0;
+            this.cbEstado.TabIndex = 3;
+            this.cbEstado.SelectedIndexChanged += new System.EventHandler(this.cbEstado_SelectedIndexChanged);
             // 
             // txtBuscar
             // 
@@ -175,39 +166,34 @@
             this.pictureBoxLogo.TabIndex = 0;
             this.pictureBoxLogo.TabStop = false;
             // 
-            // mcCalendario
+            // materialCardDataGrid
             // 
-            this.mcCalendario.BackColor = System.Drawing.Color.White;
-            this.mcCalendario.Location = new System.Drawing.Point(-1, -4);
-            this.mcCalendario.Margin = new System.Windows.Forms.Padding(1);
-            this.mcCalendario.Name = "mcCalendario";
-            this.mcCalendario.TabIndex = 6;
+            this.materialCardDataGrid.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialCardDataGrid.Controls.Add(this.dataGridView1);
+            this.materialCardDataGrid.Depth = 0;
+            this.materialCardDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.materialCardDataGrid.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialCardDataGrid.Location = new System.Drawing.Point(3, 270);
+            this.materialCardDataGrid.Margin = new System.Windows.Forms.Padding(14);
+            this.materialCardDataGrid.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialCardDataGrid.Name = "materialCardDataGrid";
+            this.materialCardDataGrid.Padding = new System.Windows.Forms.Padding(14);
+            this.materialCardDataGrid.Size = new System.Drawing.Size(1911, 804);
+            this.materialCardDataGrid.TabIndex = 1;
             // 
-            // lbEstado
+            // dataGridView1
             // 
-            this.lbEstado.AutoSize = true;
-            this.lbEstado.Depth = 0;
-            this.lbEstado.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lbEstado.Location = new System.Drawing.Point(1624, 30);
-            this.lbEstado.MouseState = MaterialSkin.MouseState.HOVER;
-            this.lbEstado.Name = "lbEstado";
-            this.lbEstado.Size = new System.Drawing.Size(50, 19);
-            this.lbEstado.TabIndex = 7;
-            this.lbEstado.Text = "Estado";
-            // 
-            // mCard
-            // 
-            this.mCard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.mCard.Controls.Add(this.mcCalendario);
-            this.mCard.Depth = 0;
-            this.mCard.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.mCard.Location = new System.Drawing.Point(1357, 14);
-            this.mCard.Margin = new System.Windows.Forms.Padding(14);
-            this.mCard.MouseState = MaterialSkin.MouseState.HOVER;
-            this.mCard.Name = "mCard";
-            this.mCard.Padding = new System.Windows.Forms.Padding(14);
-            this.mCard.Size = new System.Drawing.Size(190, 158);
-            this.mCard.TabIndex = 8;
+            this.dataGridView1.AllowUserToOrderColumns = true;
+            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.EnableHeadersVisualStyles = false;
+            this.dataGridView1.Location = new System.Drawing.Point(14, 14);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(1883, 776);
+            this.dataGridView1.TabIndex = 1;
             // 
             // Form1
             // 
@@ -226,10 +212,9 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.materialCardMenu.ResumeLayout(false);
             this.materialCardMenu.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
             this.materialCardDataGrid.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
-            this.mCard.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -241,11 +226,10 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.PictureBox pictureBoxLogo;
         private MaterialSkin.Controls.MaterialTextBox2 txtBuscar;
-        private MaterialSkin.Controls.MaterialComboBox materialComboBox1;
+        private MaterialSkin.Controls.MaterialComboBox cbEstado;
         private MaterialSkin.Controls.MaterialFloatingActionButton btnAñadir;
-        private System.Windows.Forms.MonthCalendar mcCalendario;
         private MaterialSkin.Controls.MaterialLabel lbEstado;
-        private MaterialSkin.Controls.MaterialCard mCard;
+        private System.Windows.Forms.MonthCalendar mcCalendario;
     }
 }
 
