@@ -30,19 +30,25 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.materialCardMenu = new MaterialSkin.Controls.MaterialCard();
-            this.txtBuscar = new MaterialSkin.Controls.MaterialTextBox2();
-            this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
             this.materialCardDataGrid = new MaterialSkin.Controls.MaterialCard();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dtCalendario = new System.Windows.Forms.DateTimePicker();
+            this.materialComboBox1 = new MaterialSkin.Controls.MaterialComboBox();
+            this.btnAñadir = new MaterialSkin.Controls.MaterialFloatingActionButton();
+            this.txtBuscar = new MaterialSkin.Controls.MaterialTextBox2();
+            this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
             this.materialCardMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
             this.materialCardDataGrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // materialCardMenu
             // 
             this.materialCardMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialCardMenu.Controls.Add(this.btnAñadir);
+            this.materialCardMenu.Controls.Add(this.materialComboBox1);
+            this.materialCardMenu.Controls.Add(this.dtCalendario);
             this.materialCardMenu.Controls.Add(this.txtBuscar);
             this.materialCardMenu.Controls.Add(this.pictureBoxLogo);
             this.materialCardMenu.Depth = 0;
@@ -55,45 +61,6 @@
             this.materialCardMenu.Padding = new System.Windows.Forms.Padding(14);
             this.materialCardMenu.Size = new System.Drawing.Size(1911, 141);
             this.materialCardMenu.TabIndex = 0;
-            // 
-            // txtBuscar
-            // 
-            this.txtBuscar.AnimateReadOnly = true;
-            this.txtBuscar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.txtBuscar.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtBuscar.Depth = 0;
-            this.txtBuscar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBuscar.HideSelection = true;
-            this.txtBuscar.Hint = "BUSCAR";
-            this.txtBuscar.LeadingIcon = global::Recordadora.Properties.Resources.search_32dp_1F1F1F_FILL0_wght400_GRAD0_opsz40;
-            this.txtBuscar.Location = new System.Drawing.Point(606, 46);
-            this.txtBuscar.MaxLength = 32767;
-            this.txtBuscar.MouseState = MaterialSkin.MouseState.OUT;
-            this.txtBuscar.Name = "txtBuscar";
-            this.txtBuscar.PasswordChar = '\0';
-            this.txtBuscar.PrefixSuffixText = null;
-            this.txtBuscar.ReadOnly = false;
-            this.txtBuscar.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.txtBuscar.SelectedText = "";
-            this.txtBuscar.SelectionLength = 0;
-            this.txtBuscar.SelectionStart = 0;
-            this.txtBuscar.ShortcutsEnabled = true;
-            this.txtBuscar.Size = new System.Drawing.Size(572, 48);
-            this.txtBuscar.TabIndex = 1;
-            this.txtBuscar.TabStop = false;
-            this.txtBuscar.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.txtBuscar.TrailingIcon = null;
-            this.txtBuscar.UseSystemPasswordChar = false;
-            // 
-            // pictureBoxLogo
-            // 
-            this.pictureBoxLogo.Image = global::Recordadora.Properties.Resources.Logotipo_Cruz_Roja_Horizontal_transparente_letras_negras;
-            this.pictureBoxLogo.Location = new System.Drawing.Point(3, 3);
-            this.pictureBoxLogo.Name = "pictureBoxLogo";
-            this.pictureBoxLogo.Size = new System.Drawing.Size(578, 138);
-            this.pictureBoxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxLogo.TabIndex = 0;
-            this.pictureBoxLogo.TabStop = false;
             // 
             // materialCardDataGrid
             // 
@@ -124,6 +91,96 @@
             this.dataGridView1.Size = new System.Drawing.Size(1883, 841);
             this.dataGridView1.TabIndex = 1;
             // 
+            // dtCalendario
+            // 
+            this.dtCalendario.CalendarMonthBackground = System.Drawing.SystemColors.HighlightText;
+            this.dtCalendario.Location = new System.Drawing.Point(1486, 50);
+            this.dtCalendario.Name = "dtCalendario";
+            this.dtCalendario.Size = new System.Drawing.Size(121, 29);
+            this.dtCalendario.TabIndex = 2;
+            this.dtCalendario.TabStop = false;
+            this.dtCalendario.Value = new System.DateTime(2026, 3, 2, 9, 2, 10, 0);
+            // 
+            // materialComboBox1
+            // 
+            this.materialComboBox1.AutoResize = false;
+            this.materialComboBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialComboBox1.Depth = 0;
+            this.materialComboBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.materialComboBox1.DropDownHeight = 174;
+            this.materialComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.materialComboBox1.DropDownWidth = 121;
+            this.materialComboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.materialComboBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialComboBox1.FormattingEnabled = true;
+            this.materialComboBox1.IntegralHeight = false;
+            this.materialComboBox1.ItemHeight = 43;
+            this.materialComboBox1.Items.AddRange(new object[] {
+            "(Seleccione un estado)",
+            "PENDIENTE",
+            "REALIZADO",
+            "CANCELADO"});
+            this.materialComboBox1.Location = new System.Drawing.Point(1630, 40);
+            this.materialComboBox1.MaxDropDownItems = 4;
+            this.materialComboBox1.MouseState = MaterialSkin.MouseState.OUT;
+            this.materialComboBox1.Name = "materialComboBox1";
+            this.materialComboBox1.Size = new System.Drawing.Size(220, 49);
+            this.materialComboBox1.StartIndex = 0;
+            this.materialComboBox1.TabIndex = 3;
+            // 
+            // btnAñadir
+            // 
+            this.btnAñadir.Depth = 0;
+            this.btnAñadir.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnAñadir.ForeColor = System.Drawing.Color.Blue;
+            this.btnAñadir.Icon = global::Recordadora.Properties.Resources.add_32dp_1F1F1F_FILL0_wght400_GRAD0_opsz40;
+            this.btnAñadir.Location = new System.Drawing.Point(1208, 40);
+            this.btnAñadir.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnAñadir.Name = "btnAñadir";
+            this.btnAñadir.Size = new System.Drawing.Size(56, 56);
+            this.btnAñadir.TabIndex = 4;
+            this.btnAñadir.UseVisualStyleBackColor = false;
+            // 
+            // txtBuscar
+            // 
+            this.txtBuscar.AnimateReadOnly = true;
+            this.txtBuscar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtBuscar.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtBuscar.Depth = 0;
+            this.txtBuscar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBuscar.HideSelection = true;
+            this.txtBuscar.Hint = "BUSCAR";
+            this.txtBuscar.LeadingIcon = global::Recordadora.Properties.Resources.search_32dp_1F1F1F_FILL0_wght400_GRAD0_opsz40;
+            this.txtBuscar.Location = new System.Drawing.Point(606, 46);
+            this.txtBuscar.MaxLength = 32767;
+            this.txtBuscar.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtBuscar.Name = "txtBuscar";
+            this.txtBuscar.PasswordChar = '\0';
+            this.txtBuscar.PrefixSuffixText = null;
+            this.txtBuscar.ReadOnly = false;
+            this.txtBuscar.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtBuscar.SelectedText = "";
+            this.txtBuscar.SelectionLength = 0;
+            this.txtBuscar.SelectionStart = 0;
+            this.txtBuscar.ShortcutsEnabled = true;
+            this.txtBuscar.Size = new System.Drawing.Size(572, 48);
+            this.txtBuscar.TabIndex = 1;
+            this.txtBuscar.TabStop = false;
+            this.txtBuscar.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtBuscar.TrailingIcon = null;
+            this.txtBuscar.UseAccent = false;
+            this.txtBuscar.UseSystemPasswordChar = false;
+            // 
+            // pictureBoxLogo
+            // 
+            this.pictureBoxLogo.Image = global::Recordadora.Properties.Resources.Logotipo_Cruz_Roja_Horizontal_transparente_letras_negras;
+            this.pictureBoxLogo.Location = new System.Drawing.Point(3, 3);
+            this.pictureBoxLogo.Name = "pictureBoxLogo";
+            this.pictureBoxLogo.Size = new System.Drawing.Size(578, 138);
+            this.pictureBoxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxLogo.TabIndex = 0;
+            this.pictureBoxLogo.TabStop = false;
+            // 
             // Form1
             // 
             this.BackColor = System.Drawing.SystemColors.HighlightText;
@@ -140,9 +197,9 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
             this.materialCardMenu.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
             this.materialCardDataGrid.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -154,6 +211,9 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.PictureBox pictureBoxLogo;
         private MaterialSkin.Controls.MaterialTextBox2 txtBuscar;
+        private MaterialSkin.Controls.MaterialComboBox materialComboBox1;
+        private System.Windows.Forms.DateTimePicker dtCalendario;
+        private MaterialSkin.Controls.MaterialFloatingActionButton btnAñadir;
     }
 }
 

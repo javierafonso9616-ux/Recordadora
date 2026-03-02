@@ -17,9 +17,10 @@ namespace Recordadora
             {
 
                 Formlogo.ShowDialog();
-            } */
+            }*/
 
             InitializeComponent();
+
 
 
             this.Padding = new Padding(20, 80, 20, 20);
@@ -27,18 +28,23 @@ namespace Recordadora
             this.Text = "                                                            " +
                         "                                                            " +
                         "                                                  RECORDADORA";
+
+            // Configuración de MaterialSkin para el tema y los colores
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
 
-            // El tercer parámetro es el que define el color de la línea de animación
+
+
             materialSkinManager.ColorScheme = new ColorScheme(
-                Primary.Blue800,
-                Primary.Blue800,
+                Primary.Blue900,
+                Primary.Blue900,
                 Primary.Blue200,
-                Accent.Green400,
+                Accent.Blue700,
                 TextShade.WHITE
             );
-            ActiveControl = pictureBoxLogo;
+
+
+
             this.WindowState = FormWindowState.Maximized;
 
 
@@ -48,11 +54,28 @@ namespace Recordadora
         private void Form1_Load(object sender, System.EventArgs e)
         {
             CargarDatos();
+            configurarCalendario();
+
+            // foco en la imagen para quitar el foco del resto
+            ActiveControl = pictureBoxLogo;
         }
+
+
+        private void configurarCalendario()
+        {
+            dtCalendario.MinDate = new System.DateTime(2000, 1, 1);
+            dtCalendario.Format = DateTimePickerFormat.Custom;
+            dtCalendario.CustomFormat = "dd/MM/yyyy";
+            dtCalendario.
+
+        }
+
+
 
         // configuracion del grid, colores, fuentes, etc
         public void ConfigurarGrid()
         {
+
             // --- 1. COLORES Y ESTILO VISUAL ---
             Color azulOscuro = Color.FromArgb(13, 71, 161);
             dataGridView1.BackgroundColor = Color.White;
