@@ -70,7 +70,7 @@
             this.mcCalendario.Name = "mcCalendario";
             this.mcCalendario.TabIndex = 8;
             this.mcCalendario.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.mcCalendario_DateChanged);
-            this.mcCalendario.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.mcCalendario_DateSelected);
+       
             this.mcCalendario.MouseUp += new System.Windows.Forms.MouseEventHandler(this.mcCalendario_MouseUp);
             // 
             // lbEstado
