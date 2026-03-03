@@ -10,6 +10,7 @@ namespace Recordadora
 {
     public partial class Form1 : MaterialForm
     {
+
         AccesoDatos.Datos ad = new AccesoDatos.Datos();
         private int mesActual = DateTime.Now.Month;
         private int anioActual = DateTime.Now.Year;
