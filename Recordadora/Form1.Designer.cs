@@ -37,11 +37,18 @@
             this.txtBuscar = new MaterialSkin.Controls.MaterialTextBox2();
             this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
             this.materialCardDataGrid = new MaterialSkin.Controls.MaterialCard();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgPrincipal = new System.Windows.Forms.DataGridView();
+            this.dgPendientes = new System.Windows.Forms.DataGridView();
+            this.dgHistorial = new System.Windows.Forms.DataGridView();
+            this.lbPendientes = new MaterialSkin.Controls.MaterialLabel();
+            this.lbHistorial = new MaterialSkin.Controls.MaterialLabel();
+            this.materialDivider1 = new MaterialSkin.Controls.MaterialDivider();
             this.materialCardMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
             this.materialCardDataGrid.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgPrincipal)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgPendientes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgHistorial)).BeginInit();
             this.SuspendLayout();
             // 
             // materialCardMenu
@@ -96,6 +103,7 @@
             this.btnAñadir.Size = new System.Drawing.Size(56, 56);
             this.btnAñadir.TabIndex = 4;
             this.btnAñadir.UseVisualStyleBackColor = false;
+            this.btnAñadir.Click += new System.EventHandler(this.btnAñadir_Click);
             // 
             // cbEstado
             // 
@@ -169,7 +177,12 @@
             // materialCardDataGrid
             // 
             this.materialCardDataGrid.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.materialCardDataGrid.Controls.Add(this.dataGridView1);
+            this.materialCardDataGrid.Controls.Add(this.materialDivider1);
+            this.materialCardDataGrid.Controls.Add(this.lbHistorial);
+            this.materialCardDataGrid.Controls.Add(this.lbPendientes);
+            this.materialCardDataGrid.Controls.Add(this.dgHistorial);
+            this.materialCardDataGrid.Controls.Add(this.dgPendientes);
+            this.materialCardDataGrid.Controls.Add(this.dgPrincipal);
             this.materialCardDataGrid.Depth = 0;
             this.materialCardDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.materialCardDataGrid.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
@@ -181,21 +194,74 @@
             this.materialCardDataGrid.Size = new System.Drawing.Size(1911, 804);
             this.materialCardDataGrid.TabIndex = 1;
             // 
-            // dataGridView1
+            // dgPrincipal
             // 
-            this.dataGridView1.AllowUserToOrderColumns = true;
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.EnableHeadersVisualStyles = false;
-            this.dataGridView1.Location = new System.Drawing.Point(14, 14);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(1883, 776);
-            this.dataGridView1.TabIndex = 1;
-            this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
-            
+            this.dgPrincipal.AllowUserToOrderColumns = true;
+            this.dgPrincipal.BackgroundColor = System.Drawing.SystemColors.ButtonShadow;
+            this.dgPrincipal.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgPrincipal.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
+            this.dgPrincipal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgPrincipal.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dgPrincipal.EnableHeadersVisualStyles = false;
+            this.dgPrincipal.Location = new System.Drawing.Point(14, 14);
+            this.dgPrincipal.Name = "dgPrincipal";
+            this.dgPrincipal.Size = new System.Drawing.Size(1883, 363);
+            this.dgPrincipal.TabIndex = 1;
+            this.dgPrincipal.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
+            // 
+            // dgPendientes
+            // 
+            this.dgPendientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgPendientes.Location = new System.Drawing.Point(14, 429);
+            this.dgPendientes.Name = "dgPendientes";
+            this.dgPendientes.Size = new System.Drawing.Size(910, 359);
+            this.dgPendientes.TabIndex = 2;
+            this.dgPendientes.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
+            // 
+            // dgHistorial
+            // 
+            this.dgHistorial.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgHistorial.Location = new System.Drawing.Point(981, 429);
+            this.dgHistorial.Name = "dgHistorial";
+            this.dgHistorial.Size = new System.Drawing.Size(910, 359);
+            this.dgHistorial.TabIndex = 3;
+            this.dgHistorial.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
+            // 
+            // lbPendientes
+            // 
+            this.lbPendientes.AutoSize = true;
+            this.lbPendientes.Depth = 0;
+            this.lbPendientes.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbPendientes.Location = new System.Drawing.Point(17, 407);
+            this.lbPendientes.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lbPendientes.Name = "lbPendientes";
+            this.lbPendientes.Size = new System.Drawing.Size(79, 19);
+            this.lbPendientes.TabIndex = 4;
+            this.lbPendientes.Text = "Pendientes";
+            // 
+            // lbHistorial
+            // 
+            this.lbHistorial.AutoSize = true;
+            this.lbHistorial.Depth = 0;
+            this.lbHistorial.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbHistorial.Location = new System.Drawing.Point(984, 407);
+            this.lbHistorial.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lbHistorial.Name = "lbHistorial";
+            this.lbHistorial.Size = new System.Drawing.Size(60, 19);
+            this.lbHistorial.TabIndex = 5;
+            this.lbHistorial.Text = "Historial";
+            // 
+            // materialDivider1
+            // 
+            this.materialDivider1.BackColor = System.Drawing.Color.Black;
+            this.materialDivider1.Depth = 0;
+            this.materialDivider1.ForeColor = System.Drawing.Color.Black;
+            this.materialDivider1.Location = new System.Drawing.Point(-2, 392);
+            this.materialDivider1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialDivider1.Name = "materialDivider1";
+            this.materialDivider1.Size = new System.Drawing.Size(1920, 2);
+            this.materialDivider1.TabIndex = 6;
+            this.materialDivider1.Text = "materialDivider1";
             // 
             // Form1
             // 
@@ -216,7 +282,10 @@
             this.materialCardMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
             this.materialCardDataGrid.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.materialCardDataGrid.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgPrincipal)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgPendientes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgHistorial)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -225,13 +294,18 @@
 
         private MaterialSkin.Controls.MaterialCard materialCardMenu;
         private MaterialSkin.Controls.MaterialCard materialCardDataGrid;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgPrincipal;
         private System.Windows.Forms.PictureBox pictureBoxLogo;
         private MaterialSkin.Controls.MaterialTextBox2 txtBuscar;
         private MaterialSkin.Controls.MaterialComboBox cbEstado;
         private MaterialSkin.Controls.MaterialFloatingActionButton btnAñadir;
         private MaterialSkin.Controls.MaterialLabel lbEstado;
         private System.Windows.Forms.MonthCalendar mcCalendario;
+        private System.Windows.Forms.DataGridView dgHistorial;
+        private System.Windows.Forms.DataGridView dgPendientes;
+        private MaterialSkin.Controls.MaterialLabel lbHistorial;
+        private MaterialSkin.Controls.MaterialLabel lbPendientes;
+        private MaterialSkin.Controls.MaterialDivider materialDivider1;
     }
 }
 

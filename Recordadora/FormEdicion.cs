@@ -21,7 +21,7 @@ namespace Recordadora
             dtpFecha.Value = DateTime.Now;
 
             this.Text = "Nueva Tarea";
-            materialButton1.Visible = false; // Si es nuevo, no se puede eliminar
+            btEliminar.Visible = false; // Si es nuevo, no se puede eliminar
             cbEstado.SelectedIndex = 0; // PENDIENTE por defecto
         }
 
@@ -60,12 +60,19 @@ namespace Recordadora
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             // 1. Validación básica
+            string estadoSeleccionado = cbEstado.SelectedItem?.ToString() ?? "(Seleccione un estado)";
+
             if (string.IsNullOrWhiteSpace(txtDescripcion.Text))
             {
                 MessageBox.Show("La descripción no puede estar vacía.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
+            // Si no ha elegido nada válido, forzamos a PENDIENTE
+            if (estadoSeleccionado == "(Seleccione un estado)")
+            {
+                estadoSeleccionado = "PENDIENTE";
+            }
             string consulta = "";
 
             // 2. Preparamos los parámetros (AÑADIMOS LA FECHA AQUÍ)
@@ -75,15 +82,24 @@ namespace Recordadora
         new SqlParameter("@TITULO", txtTitulo.Text.Trim()),
         new SqlParameter("@DESCRIPCION", txtDescripcion.Text.Trim()),
         new SqlParameter("@SOLUCION", txtSolucion.Text.Trim()),
-        new SqlParameter("@ESTADO", cbEstado.SelectedItem.ToString())
+        new SqlParameter("@ESTADO", estadoSeleccionado)
             };
 
             // 3. Decidimos si es INSERT o UPDATE
+            // Si es nuevo, el ID es 0, por lo que hacemos un INSERT. Si no, hacemos un UPDATE.
             if (idTareaActual == 0)
             {
-                // INSERT: AÑADIMOS LA FECHA A LA CONSULTA
-                consulta = "INSERT INTO TABLA_RECORDADORA (FECHA, TITULO, DESCRIPCION, SOLUCION, ESTADO) " +
-                           "VALUES (@FECHA, @TITULO, @DESCRIPCION, @SOLUCION, @ESTADO)";
+                if (cbEstado.SelectedItem.ToString() != "(Seleccione un estado)")
+                {
+                    // INSERT: AÑADIMOS LA FECHA A LA CONSULTA
+                    consulta = "INSERT INTO TABLA_RECORDADORA (FECHA, TITULO, DESCRIPCION, SOLUCION, ESTADO) " +
+                               "VALUES (@FECHA, @TITULO, @DESCRIPCION, @SOLUCION, @ESTADO)";
+                }
+                else
+                {
+                    consulta = "INSERT INTO TABLA_RECORDADORA (FECHA, TITULO, DESCRIPCION, SOLUCION, ESTADO) " +
+                               "VALUES (@FECHA, @TITULO, @DESCRIPCION, @SOLUCION, 'PENDIENTE')";
+                }
             }
             else
             {
@@ -106,7 +122,13 @@ namespace Recordadora
 
             // 5. Cerramos devolviendo OK
             this.DialogResult = DialogResult.OK;
+
             this.Close();
+        }
+
+        private void btEliminar_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

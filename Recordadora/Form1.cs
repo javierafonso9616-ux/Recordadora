@@ -43,7 +43,11 @@ namespace Recordadora
         private void Form1_Load(object sender, System.EventArgs e)
         {
             CargarDatos();
-            ConfigurarGrid();
+
+            ConfigurarGrid(dgPrincipal);
+            ConfigurarGrid(dgPendientes);
+            ConfigurarGrid(dgHistorial);
+
             ConfigurarCalendar();
 
             // Foco inicial
@@ -61,76 +65,112 @@ namespace Recordadora
         }
 
         //--- CONFIGURAR GRID ---
-        public void ConfigurarGrid()
+        // Ahora el método recibe "qué" DataGridView quieres configurar
+        public void ConfigurarGrid(DataGridView grid)
         {
             Color azulOscuro = Color.FromArgb(13, 71, 161);
-            dataGridView1.BackgroundColor = Color.White;
-            dataGridView1.BorderStyle = BorderStyle.None;
-            dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dataGridView1.GridColor = Color.FromArgb(230, 230, 230);
 
-            dataGridView1.EnableHeadersVisualStyles = false;
-            dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = azulOscuro;
-            dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            dataGridView1.ColumnHeadersHeight = 40;
+            // Aplicamos los estilos al "grid" que nos hayan pasado
+            grid.BackgroundColor = Color.White;
+            grid.BorderStyle = BorderStyle.None;
+            grid.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            grid.GridColor = Color.FromArgb(230, 230, 230);
 
-            dataGridView1.DefaultCellStyle.Font = new Font("Segoe UI", 10);
-            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect; // Permite seleccionar toda la fila al hacer clic en cualquier celda
-            dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(245, 245, 245);
+            grid.EnableHeadersVisualStyles = false;
+            grid.ColumnHeadersDefaultCellStyle.BackColor = azulOscuro;
+            grid.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            grid.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+            grid.ColumnHeadersHeight = 40;
 
-            dataGridView1.DefaultCellStyle.WrapMode = DataGridViewTriState.True; // Permite que el texto se ajuste a varias líneas si es necesario
-            dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells; // Ajusta la altura de las filas automáticamente según el contenido
-            dataGridView1.RowHeadersVisible = false; // Oculta la columna de encabezado de filas
+            grid.DefaultCellStyle.Font = new Font("Segoe UI", 10);
+            grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            grid.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(245, 245, 245);
+
+            grid.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            grid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            grid.RowHeadersVisible = false;
 
             // --- BLOQUEO DE EDICIÓN ---
-            dataGridView1.ReadOnly = true; // Impide editar el texto de las celdas
-            dataGridView1.AllowUserToAddRows = false; // Quita la fila en blanco del final
-            dataGridView1.AllowUserToDeleteRows = false; // Impide borrar pulsando la tecla 'Supr'
+            grid.ReadOnly = true;
+            grid.AllowUserToAddRows = false;
+            grid.AllowUserToDeleteRows = false;
 
-            // --- OCULTAR EL ID ---
-            if (dataGridView1.Columns.Contains("ID"))
+            // --- OCULTAR EL ID (Si lo tiene) ---
+            if (grid.Columns.Contains("ID"))
             {
-                dataGridView1.Columns["ID"].Visible = false;
+                grid.Columns["ID"].Visible = false;
             }
 
-            // Ajuste de columnas
-            if (dataGridView1.Columns.Contains("DESCRIPCION")) dataGridView1.Columns["DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            if (dataGridView1.Columns.Contains("SOLUCION")) dataGridView1.Columns["SOLUCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            if (dataGridView1.Columns.Contains("FECHA")) dataGridView1.Columns["FECHA"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            if (dataGridView1.Columns.Contains("ESTADO")) dataGridView1.Columns["ESTADO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            if (dataGridView1.Columns.Contains("TITULO"))
+            // --- Ajuste de columnas específicas (Solo si el grid las tiene) ---
+            if (grid.Columns.Contains("DESCRIPCION")) grid.Columns["DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            if (grid.Columns.Contains("SOLUCION")) grid.Columns["SOLUCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            if (grid.Columns.Contains("FECHA")) grid.Columns["FECHA"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            if (grid.Columns.Contains("ESTADO")) grid.Columns["ESTADO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            if (grid.Columns.Contains("TITULO"))
             {
-                dataGridView1.Columns["TITULO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridView1.Columns["TITULO"].DefaultCellStyle.WrapMode = DataGridViewTriState.False;
+                grid.Columns["TITULO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                grid.Columns["TITULO"].DefaultCellStyle.WrapMode = DataGridViewTriState.False;
             }
         }
 
         //--- CARGAR DATOS ---
         public void CargarDatos()
         {
-            // 1. Nos traemos TODO de la base de datos (SIN EL WHERE).
-            // Así la tabla interna en memoria tendrá el histórico completo y el calendario podrá buscar por cualquier mes.
+            // 1. Nos traemos TODO de la base de datos de un solo golpe. (Máxima velocidad)
             string consulta = "SELECT ID, FECHA, TITULO, DESCRIPCION, SOLUCION, ESTADO FROM TABLA_RECORDADORA";
 
             DataTable dt = ad.ObtenerDatos(consulta);
 
             if (dt != null)
             {
-                dataGridView1.DataSource = dt;
-                ConfigurarGrid();
+                // ====================================================================
+                // GRID 1: PRINCIPAL (El que interactúa con el Calendario)
+                // ====================================================================
+                dgPrincipal.DataSource = dt; // Este usa la vista por defecto de la tabla
+                ConfigurarGrid(dgPrincipal);
 
-                foreach (DataGridViewColumn column in dataGridView1.Columns)
+                foreach (DataGridViewColumn column in dgPrincipal.Columns)
                 {
                     column.MinimumWidth = 100;
                 }
 
-                // 2. APLICAMOS EL FILTRO VISUAL INICIAL (SOLO HOY)
-                // Usamos la misma lógica que el calendario, ocultando todo lo que no sea de hoy
+                // Filtro visual inicial (SOLO HOY)
                 string hoy = DateTime.Now.ToString("yyyy-MM-dd");
                 string manana = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
-
                 dt.DefaultView.RowFilter = string.Format("FECHA >= '{0}' AND FECHA < '{1}'", hoy, manana);
+
+
+                // ====================================================================
+                // GRID 2: PENDIENTES (Solo tareas pendientes)
+                // ====================================================================
+
+                DataView dvPendientes = new DataView(dt);
+                dvPendientes.RowFilter = "ESTADO = 'PENDIENTE'";
+                dvPendientes.Sort = "FECHA ASC";
+
+                dgPendientes.DataSource = dvPendientes;
+                ConfigurarGrid(dgPendientes);
+
+                foreach (DataGridViewColumn column in dgPendientes.Columns)
+                {
+                    column.MinimumWidth = 100;
+                }
+
+
+                // ====================================================================
+                // GRID 3: HISTORIAL (Todos los datos ordenados por fecha)
+                // ====================================================================
+                DataView dvHistorial = new DataView(dt);
+
+                dvHistorial.Sort = "FECHA DESC";
+
+                dgHistorial.DataSource = dvHistorial;
+                ConfigurarGrid(dgHistorial);
+
+                foreach (DataGridViewColumn column in dgHistorial.Columns)
+                {
+                    column.MinimumWidth = 100;
+                }
             }
         }
 
@@ -139,7 +179,7 @@ namespace Recordadora
         // Gestiona tanto el clic en un día como la navegación por meses 
         private void mcCalendario_DateChanged(object sender, DateRangeEventArgs e)
         {
-            if (dataGridView1.DataSource is DataTable dt)
+            if (dgPrincipal.DataSource is DataTable dt)
             {
                 DataView dv = dt.DefaultView;
 
@@ -185,7 +225,7 @@ namespace Recordadora
 
             if (info.HitArea == MonthCalendar.HitArea.TodayLink)
             {
-                if (dataGridView1.DataSource is DataTable dt)
+                if (dgPrincipal.DataSource is DataTable dt)
                     dt.DefaultView.RowFilter = "";
 
                 CargarDatos();
@@ -201,7 +241,7 @@ namespace Recordadora
         // Filtra por estado (PENDIENTE, REALIZADO, CANCELADO)
         private void cbEstado_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (dataGridView1.DataSource is DataTable dt)
+            if (dgPrincipal.DataSource is DataTable dt)
             {
                 DataView dv = dt.DefaultView;
                 string estadoSeleccionado = cbEstado.SelectedItem.ToString();
@@ -218,9 +258,10 @@ namespace Recordadora
             }
         }
 
+        // BUSCADOR GENERAL: FILTRA POR TÍTULO, DESCRIPCIÓN O SOLUCIÓN
         private void txtBuscar_TextChanged(object sender, EventArgs e)
         {
-            if (dataGridView1.DataSource is DataTable dt)
+            if (dgPrincipal.DataSource is DataTable dt)
             {
                 DataView dv = dt.DefaultView;
                 string busqueda = txtBuscar.Text.Trim();
@@ -248,7 +289,7 @@ namespace Recordadora
             if (e.RowIndex >= 0)
             {
                 // 1. Pillamos la fila completa que el usuario ha clicado
-                DataGridViewRow fila = dataGridView1.Rows[e.RowIndex];
+                DataGridViewRow fila = dgPrincipal.Rows[e.RowIndex];
 
                 // 2. Extraemos todos los datos usando el nombre de la columna en la BD
                 // Usamos '?.' y '?? ""' por si algún campo (como la solución) estuviera nulo en la BD
@@ -268,6 +309,17 @@ namespace Recordadora
                     // Si cerramos el formulario dándole a Guardar (DialogResult.OK), recargamos el Grid
                     CargarDatos();
                 }
+
+            }
+        }
+
+        private void btnAñadir_Click(object sender, EventArgs e)
+        {
+            FormEdicion frm = new FormEdicion();
+
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                CargarDatos();
 
             }
         }

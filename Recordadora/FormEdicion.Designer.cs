@@ -33,14 +33,14 @@
             this.txtSolucion = new MaterialSkin.Controls.MaterialMultiLineTextBox2();
             this.dtpFecha = new System.Windows.Forms.DateTimePicker();
             this.cbEstado = new MaterialSkin.Controls.MaterialComboBox();
-            this.materialButton1 = new MaterialSkin.Controls.MaterialButton();
+            this.btEliminar = new MaterialSkin.Controls.MaterialButton();
             this.btnGuardar = new MaterialSkin.Controls.MaterialButton();
             this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
+            this.lbTItuloFormEdicion = new MaterialSkin.Controls.MaterialLabel();
             this.lbSolucionFormEdicion = new MaterialSkin.Controls.MaterialLabel();
             this.lbDescripcionFormEdicion = new MaterialSkin.Controls.MaterialLabel();
             this.lbFechaFormEdicion = new MaterialSkin.Controls.MaterialLabel();
             this.lbEstadoFormEdicion = new MaterialSkin.Controls.MaterialLabel();
-            this.lbTItuloFormEdicion = new MaterialSkin.Controls.MaterialLabel();
             this.materialCard1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -68,7 +68,6 @@
             this.txtTitulo.Size = new System.Drawing.Size(250, 48);
             this.txtTitulo.TabIndex = 0;
             this.txtTitulo.TabStop = false;
-            this.txtTitulo.Text = "TXTTITULO";
             this.txtTitulo.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtTitulo.TrailingIcon = null;
             this.txtTitulo.UseSystemPasswordChar = false;
@@ -81,7 +80,7 @@
             this.txtDescripcion.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtDescripcion.Depth = 0;
             this.txtDescripcion.HideSelection = true;
-            this.txtDescripcion.Location = new System.Drawing.Point(403, 122);
+            this.txtDescripcion.Location = new System.Drawing.Point(400, 122);
             this.txtDescripcion.MaxLength = 32767;
             this.txtDescripcion.MouseState = MaterialSkin.MouseState.OUT;
             this.txtDescripcion.Name = "txtDescripcion";
@@ -95,7 +94,6 @@
             this.txtDescripcion.Size = new System.Drawing.Size(538, 129);
             this.txtDescripcion.TabIndex = 1;
             this.txtDescripcion.TabStop = false;
-            this.txtDescripcion.Text = "MATERIALMULTILINETEXTBOX21";
             this.txtDescripcion.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtDescripcion.UseSystemPasswordChar = false;
             // 
@@ -118,10 +116,9 @@
             this.txtSolucion.SelectionLength = 0;
             this.txtSolucion.SelectionStart = 0;
             this.txtSolucion.ShortcutsEnabled = true;
-            this.txtSolucion.Size = new System.Drawing.Size(538, 128);
+            this.txtSolucion.Size = new System.Drawing.Size(538, 129);
             this.txtSolucion.TabIndex = 2;
             this.txtSolucion.TabStop = false;
-            this.txtSolucion.Text = "MATERIALMULTILINETEXTBOX22";
             this.txtSolucion.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtSolucion.UseSystemPasswordChar = false;
             // 
@@ -159,24 +156,25 @@
             this.cbEstado.StartIndex = 0;
             this.cbEstado.TabIndex = 4;
             // 
-            // materialButton1
+            // btEliminar
             // 
-            this.materialButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.materialButton1.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.materialButton1.Depth = 0;
-            this.materialButton1.HighEmphasis = true;
-            this.materialButton1.Icon = null;
-            this.materialButton1.Location = new System.Drawing.Point(719, 516);
-            this.materialButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.materialButton1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialButton1.Name = "materialButton1";
-            this.materialButton1.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.materialButton1.Size = new System.Drawing.Size(88, 36);
-            this.materialButton1.TabIndex = 6;
-            this.materialButton1.Text = "Eliminar";
-            this.materialButton1.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.materialButton1.UseAccentColor = false;
-            this.materialButton1.UseVisualStyleBackColor = true;
+            this.btEliminar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btEliminar.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btEliminar.Depth = 0;
+            this.btEliminar.HighEmphasis = true;
+            this.btEliminar.Icon = null;
+            this.btEliminar.Location = new System.Drawing.Point(719, 516);
+            this.btEliminar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btEliminar.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btEliminar.Name = "btEliminar";
+            this.btEliminar.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btEliminar.Size = new System.Drawing.Size(88, 36);
+            this.btEliminar.TabIndex = 6;
+            this.btEliminar.Text = "Eliminar";
+            this.btEliminar.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btEliminar.UseAccentColor = false;
+            this.btEliminar.UseVisualStyleBackColor = true;
+            this.btEliminar.Click += new System.EventHandler(this.btEliminar_Click);
             // 
             // btnGuardar
             // 
@@ -217,6 +215,18 @@
             this.materialCard1.Padding = new System.Windows.Forms.Padding(14);
             this.materialCard1.Size = new System.Drawing.Size(960, 505);
             this.materialCard1.TabIndex = 13;
+            // 
+            // lbTItuloFormEdicion
+            // 
+            this.lbTItuloFormEdicion.AutoSize = true;
+            this.lbTItuloFormEdicion.Depth = 0;
+            this.lbTItuloFormEdicion.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lbTItuloFormEdicion.Location = new System.Drawing.Point(28, 36);
+            this.lbTItuloFormEdicion.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lbTItuloFormEdicion.Name = "lbTItuloFormEdicion";
+            this.lbTItuloFormEdicion.Size = new System.Drawing.Size(42, 19);
+            this.lbTItuloFormEdicion.TabIndex = 13;
+            this.lbTItuloFormEdicion.Text = "Título";
             // 
             // lbSolucionFormEdicion
             // 
@@ -266,18 +276,6 @@
             this.lbEstadoFormEdicion.TabIndex = 8;
             this.lbEstadoFormEdicion.Text = "Estado";
             // 
-            // lbTItuloFormEdicion
-            // 
-            this.lbTItuloFormEdicion.AutoSize = true;
-            this.lbTItuloFormEdicion.Depth = 0;
-            this.lbTItuloFormEdicion.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lbTItuloFormEdicion.Location = new System.Drawing.Point(28, 36);
-            this.lbTItuloFormEdicion.MouseState = MaterialSkin.MouseState.HOVER;
-            this.lbTItuloFormEdicion.Name = "lbTItuloFormEdicion";
-            this.lbTItuloFormEdicion.Size = new System.Drawing.Size(42, 19);
-            this.lbTItuloFormEdicion.TabIndex = 13;
-            this.lbTItuloFormEdicion.Text = "Título";
-            // 
             // FormEdicion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -285,7 +283,7 @@
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(966, 572);
             this.Controls.Add(this.btnGuardar);
-            this.Controls.Add(this.materialButton1);
+            this.Controls.Add(this.btEliminar);
             this.Controls.Add(this.cbEstado);
             this.Controls.Add(this.dtpFecha);
             this.Controls.Add(this.txtDescripcion);
@@ -309,7 +307,7 @@
         private MaterialSkin.Controls.MaterialMultiLineTextBox2 txtSolucion;
         private System.Windows.Forms.DateTimePicker dtpFecha;
         private MaterialSkin.Controls.MaterialComboBox cbEstado;
-        private MaterialSkin.Controls.MaterialButton materialButton1;
+        private MaterialSkin.Controls.MaterialButton btEliminar;
         private MaterialSkin.Controls.MaterialButton btnGuardar;
         private MaterialSkin.Controls.MaterialCard materialCard1;
         private MaterialSkin.Controls.MaterialLabel lbEstadoFormEdicion;
