@@ -128,7 +128,31 @@ namespace Recordadora
 
         private void btEliminar_Click(object sender, EventArgs e)
         {
+            // 1. Preguntamos al usuario si está seguro (Regla de oro de UX)
+            DialogResult respuesta = MessageBox.Show(
+                "¿Estás seguro de que deseas eliminar este registro? Esta acción no se puede deshacer.",
+                "Confirmar eliminación",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
 
+            // 2. Si el usuario dice que SÍ (Yes)
+            if (respuesta == DialogResult.Yes)
+            {
+                // Preparamos la consulta SQL para borrar usando el ID de la tarea actual
+                string consulta = "DELETE FROM TABLA_RECORDADORA WHERE ID = @ID";
+
+                SqlParameter[] parametros = new SqlParameter[]
+                {
+            new SqlParameter("@ID", idTareaActual)
+                };
+
+                // Ejecutamos el comando en la base de datos
+                ad.EjecutarComando(consulta, parametros);
+
+                // Cerramos el formulario devolviendo OK para que el Form1 sepa que tiene que recargar los Grids
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
         }
     }
 }

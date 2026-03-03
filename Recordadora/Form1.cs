@@ -18,7 +18,7 @@ namespace Recordadora
         {
             InitializeComponent();
 
-            this.Padding = new Padding(20, 80, 20, 20);
+            //this.Padding = new Padding(20, 80, 20, 20);
 
             // Gochada para centrar el titulo
             this.Text = "                                                             " +
@@ -36,12 +36,13 @@ namespace Recordadora
                 TextShade.WHITE
             );
 
-            this.WindowState = FormWindowState.Maximized;
+
         }
 
         // --- FORM LOAD ---
         private void Form1_Load(object sender, System.EventArgs e)
         {
+
             CargarDatos();
 
             ConfigurarGrid(dgPrincipal);
@@ -50,9 +51,92 @@ namespace Recordadora
 
             ConfigurarCalendar();
 
+            BotonRedondoExcel();
+
             // Foco inicial
             ActiveControl = pictureBoxLogo;
+
+            // --- MAXIMIZAR LA VENTANA AL INICIO ---
+            this.MaximizedBounds = Screen.PrimaryScreen.WorkingArea;
+            this.WindowState = FormWindowState.Maximized;
+
+
         }
+
+        // --- BOTÓN REDONDO EXPORTAR CON ICONO ---
+        private void BotonRedondoExcel()
+        {
+
+            // --- BOTÓN REDONDO EXPORTAR CON ICONO Y HOVER ---
+
+            mbExportarExcel.Text = "";
+            mbExportarExcel.BackColor = Color.White;
+            mbExportarExcel.FlatStyle = FlatStyle.Flat;
+            mbExportarExcel.FlatAppearance.BorderSize = 0;
+
+            // 1. Variable para saber si el ratón está encima
+            bool ratonEncima = false;
+
+            // 2. Eventos para detectar cuándo entra y sale el ratón
+            mbExportarExcel.MouseEnter += (s, ev) =>
+            {
+                ratonEncima = true;
+                mbExportarExcel.Invalidate(); // Fuerza al botón a redibujarse
+            };
+
+            mbExportarExcel.MouseLeave += (s, ev) =>
+            {
+                ratonEncima = false;
+                mbExportarExcel.Invalidate(); // Fuerza al botón a redibujarse
+            };
+
+
+            // 3. La lógica de dibujo con SOMBRA Y HOVER MATERIAL DESIGN
+            mbExportarExcel.Paint += (s, ev) =>
+            {
+                ev.Graphics.Clear(Color.White);
+                ev.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+                int margen = 4;
+                int anchoReal = mbExportarExcel.Width - margen - 1;
+                int altoReal = mbExportarExcel.Height - margen - 1;
+
+                // --- 1. DIBUJAMOS LA SOMBRA ---
+                using (SolidBrush brochaSombra = new SolidBrush(Color.FromArgb(50, 0, 0, 0)))
+                {
+                    ev.Graphics.FillEllipse(brochaSombra, 2, 3, anchoReal, altoReal);
+                }
+
+                // --- 2. DIBUJAMOS EL BOTÓN VERDE (Siempre el color base) ---
+                using (SolidBrush brochaVerde = new SolidBrush(Color.FromArgb(0, 192, 0)))
+                {
+                    ev.Graphics.FillEllipse(brochaVerde, 0, 0, anchoReal, altoReal);
+                }
+
+                // --- 3. EFECTO HOVER ESTILO MATERIAL DESIGN ("La Lejía") ---
+                if (ratonEncima)
+                {
+                    // Pintamos un círculo blanco al 20% de opacidad (50 sobre 255) justo encima del verde
+                    using (SolidBrush brochaHover = new SolidBrush(Color.FromArgb(50, 255, 255, 255)))
+                    {
+                        ev.Graphics.FillEllipse(brochaHover, 0, 0, anchoReal, altoReal);
+                    }
+                }
+
+                // --- 4. DIBUJAMOS EL ICONO CENTRADO ---
+                Image iconoExcel = Properties.Resources.icons8_export_excel_32;
+
+                if (iconoExcel != null)
+                {
+                    int x = (anchoReal - iconoExcel.Width) / 2;
+                    int y = (altoReal - iconoExcel.Height) / 2;
+                    ev.Graphics.DrawImage(iconoExcel, x, y, iconoExcel.Width, iconoExcel.Height);
+                }
+            };
+
+        }
+
+
 
         // --- CONFIGURACIÓN ---
         //--- CONFIGURAR CALENDARIO ---
@@ -79,10 +163,10 @@ namespace Recordadora
             grid.EnableHeadersVisualStyles = false;
             grid.ColumnHeadersDefaultCellStyle.BackColor = azulOscuro;
             grid.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            grid.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+            grid.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
             grid.ColumnHeadersHeight = 40;
 
-            grid.DefaultCellStyle.Font = new Font("Segoe UI", 10);
+            grid.DefaultCellStyle.Font = new Font("Segoe UI", 9);
             grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             grid.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(245, 245, 245);
 
@@ -281,18 +365,21 @@ namespace Recordadora
             }
         }
 
-        // DOBLE CLICK CELDA: ABRIR FORMULARIO DE EDICIÓN (POR HACER)
+        // DOBLE CLICK CELDA: ABRIR FORMULARIO DE EDICIÓN 
 
-        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void DataGridView_CellDoubleClickGlobal(object sender, DataGridViewCellEventArgs e)
         {
             // Verificamos que no hayan hecho clic en la cabecera de las columnas (eso sería el índice -1)
             if (e.RowIndex >= 0)
             {
-                // 1. Pillamos la fila completa que el usuario ha clicado
-                DataGridViewRow fila = dgPrincipal.Rows[e.RowIndex];
+
+                // Puede ser dgPrincipal, dgPendientes o dgHistorial, 
+                DataGridView gridClicado = sender as DataGridView;
+
+                // 1. Pillamos la fila completa de ESE grid en concreto
+                DataGridViewRow fila = gridClicado.Rows[e.RowIndex];
 
                 // 2. Extraemos todos los datos usando el nombre de la columna en la BD
-                // Usamos '?.' y '?? ""' por si algún campo (como la solución) estuviera nulo en la BD
                 int idTarea = Convert.ToInt32(fila.Cells["ID"].Value);
                 DateTime fecha = Convert.ToDateTime(fila.Cells["FECHA"].Value);
                 string titulo = fila.Cells["TITULO"].Value?.ToString() ?? "";
@@ -306,10 +393,9 @@ namespace Recordadora
                 // ShowDialog hace que el formulario se abra por encima y bloquee el principal hasta que se cierre
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
-                    // Si cerramos el formulario dándole a Guardar (DialogResult.OK), recargamos el Grid
+                    // Si cerramos el formulario dándole a Guardar, recargamos los Grids
                     CargarDatos();
                 }
-
             }
         }
 
@@ -322,6 +408,15 @@ namespace Recordadora
                 CargarDatos();
 
             }
+        }
+
+        private void mbExportarExcel_Click(object sender, EventArgs e)
+        {
+            // Le pasamos los 3 DataGridViews al formulario en el momento de crearlo
+            FormExportar frm = new FormExportar(dgPrincipal, dgPendientes, dgHistorial);
+
+
+            frm.ShowDialog();
         }
     }
 }

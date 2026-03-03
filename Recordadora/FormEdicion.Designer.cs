@@ -53,7 +53,7 @@
             this.txtTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.txtTitulo.HideSelection = true;
             this.txtTitulo.LeadingIcon = null;
-            this.txtTitulo.Location = new System.Drawing.Point(28, 122);
+            this.txtTitulo.Location = new System.Drawing.Point(22, 36);
             this.txtTitulo.MaxLength = 32767;
             this.txtTitulo.MouseState = MaterialSkin.MouseState.OUT;
             this.txtTitulo.Name = "txtTitulo";
@@ -80,18 +80,18 @@
             this.txtDescripcion.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtDescripcion.Depth = 0;
             this.txtDescripcion.HideSelection = true;
-            this.txtDescripcion.Location = new System.Drawing.Point(400, 122);
+            this.txtDescripcion.Location = new System.Drawing.Point(397, 36);
             this.txtDescripcion.MaxLength = 32767;
             this.txtDescripcion.MouseState = MaterialSkin.MouseState.OUT;
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.PasswordChar = '\0';
             this.txtDescripcion.ReadOnly = false;
-            this.txtDescripcion.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtDescripcion.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtDescripcion.SelectedText = "";
             this.txtDescripcion.SelectionLength = 0;
             this.txtDescripcion.SelectionStart = 0;
             this.txtDescripcion.ShortcutsEnabled = true;
-            this.txtDescripcion.Size = new System.Drawing.Size(538, 129);
+            this.txtDescripcion.Size = new System.Drawing.Size(538, 170);
             this.txtDescripcion.TabIndex = 1;
             this.txtDescripcion.TabStop = false;
             this.txtDescripcion.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -105,18 +105,18 @@
             this.txtSolucion.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtSolucion.Depth = 0;
             this.txtSolucion.HideSelection = true;
-            this.txtSolucion.Location = new System.Drawing.Point(400, 234);
+            this.txtSolucion.Location = new System.Drawing.Point(397, 246);
             this.txtSolucion.MaxLength = 32767;
             this.txtSolucion.MouseState = MaterialSkin.MouseState.OUT;
             this.txtSolucion.Name = "txtSolucion";
             this.txtSolucion.PasswordChar = '\0';
             this.txtSolucion.ReadOnly = false;
-            this.txtSolucion.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtSolucion.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtSolucion.SelectedText = "";
             this.txtSolucion.SelectionLength = 0;
             this.txtSolucion.SelectionStart = 0;
             this.txtSolucion.ShortcutsEnabled = true;
-            this.txtSolucion.Size = new System.Drawing.Size(538, 129);
+            this.txtSolucion.Size = new System.Drawing.Size(538, 170);
             this.txtSolucion.TabIndex = 2;
             this.txtSolucion.TabStop = false;
             this.txtSolucion.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -124,7 +124,7 @@
             // 
             // dtpFecha
             // 
-            this.dtpFecha.Location = new System.Drawing.Point(25, 225);
+            this.dtpFecha.Location = new System.Drawing.Point(22, 122);
             this.dtpFecha.Name = "dtpFecha";
             this.dtpFecha.Size = new System.Drawing.Size(250, 20);
             this.dtpFecha.TabIndex = 3;
@@ -148,7 +148,7 @@
             "PENDIENTE",
             "REALIZADO",
             "CANCELADO"});
-            this.cbEstado.Location = new System.Drawing.Point(25, 298);
+            this.cbEstado.Location = new System.Drawing.Point(22, 184);
             this.cbEstado.MaxDropDownItems = 4;
             this.cbEstado.MouseState = MaterialSkin.MouseState.OUT;
             this.cbEstado.Name = "cbEstado";
@@ -201,8 +201,12 @@
             this.materialCard1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.materialCard1.Controls.Add(this.lbTItuloFormEdicion);
             this.materialCard1.Controls.Add(this.lbSolucionFormEdicion);
+            this.materialCard1.Controls.Add(this.cbEstado);
             this.materialCard1.Controls.Add(this.lbDescripcionFormEdicion);
+            this.materialCard1.Controls.Add(this.dtpFecha);
             this.materialCard1.Controls.Add(this.lbFechaFormEdicion);
+            this.materialCard1.Controls.Add(this.txtTitulo);
+            this.materialCard1.Controls.Add(this.txtDescripcion);
             this.materialCard1.Controls.Add(this.lbEstadoFormEdicion);
             this.materialCard1.Controls.Add(this.txtSolucion);
             this.materialCard1.Depth = 0;
@@ -221,7 +225,7 @@
             this.lbTItuloFormEdicion.AutoSize = true;
             this.lbTItuloFormEdicion.Depth = 0;
             this.lbTItuloFormEdicion.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lbTItuloFormEdicion.Location = new System.Drawing.Point(28, 36);
+            this.lbTItuloFormEdicion.Location = new System.Drawing.Point(19, 14);
             this.lbTItuloFormEdicion.MouseState = MaterialSkin.MouseState.HOVER;
             this.lbTItuloFormEdicion.Name = "lbTItuloFormEdicion";
             this.lbTItuloFormEdicion.Size = new System.Drawing.Size(42, 19);
@@ -233,7 +237,7 @@
             this.lbSolucionFormEdicion.AutoSize = true;
             this.lbSolucionFormEdicion.Depth = 0;
             this.lbSolucionFormEdicion.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lbSolucionFormEdicion.Location = new System.Drawing.Point(397, 212);
+            this.lbSolucionFormEdicion.Location = new System.Drawing.Point(394, 224);
             this.lbSolucionFormEdicion.MouseState = MaterialSkin.MouseState.HOVER;
             this.lbSolucionFormEdicion.Name = "lbSolucionFormEdicion";
             this.lbSolucionFormEdicion.Size = new System.Drawing.Size(63, 19);
@@ -245,7 +249,7 @@
             this.lbDescripcionFormEdicion.AutoSize = true;
             this.lbDescripcionFormEdicion.Depth = 0;
             this.lbDescripcionFormEdicion.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lbDescripcionFormEdicion.Location = new System.Drawing.Point(397, 36);
+            this.lbDescripcionFormEdicion.Location = new System.Drawing.Point(394, 14);
             this.lbDescripcionFormEdicion.MouseState = MaterialSkin.MouseState.HOVER;
             this.lbDescripcionFormEdicion.Name = "lbDescripcionFormEdicion";
             this.lbDescripcionFormEdicion.Size = new System.Drawing.Size(84, 19);
@@ -257,7 +261,7 @@
             this.lbFechaFormEdicion.AutoSize = true;
             this.lbFechaFormEdicion.Depth = 0;
             this.lbFechaFormEdicion.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lbFechaFormEdicion.Location = new System.Drawing.Point(22, 139);
+            this.lbFechaFormEdicion.Location = new System.Drawing.Point(19, 100);
             this.lbFechaFormEdicion.MouseState = MaterialSkin.MouseState.HOVER;
             this.lbFechaFormEdicion.Name = "lbFechaFormEdicion";
             this.lbFechaFormEdicion.Size = new System.Drawing.Size(44, 19);
@@ -269,7 +273,7 @@
             this.lbEstadoFormEdicion.AutoSize = true;
             this.lbEstadoFormEdicion.Depth = 0;
             this.lbEstadoFormEdicion.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lbEstadoFormEdicion.Location = new System.Drawing.Point(22, 209);
+            this.lbEstadoFormEdicion.Location = new System.Drawing.Point(19, 162);
             this.lbEstadoFormEdicion.MouseState = MaterialSkin.MouseState.HOVER;
             this.lbEstadoFormEdicion.Name = "lbEstadoFormEdicion";
             this.lbEstadoFormEdicion.Size = new System.Drawing.Size(50, 19);
@@ -284,10 +288,6 @@
             this.ClientSize = new System.Drawing.Size(966, 572);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.btEliminar);
-            this.Controls.Add(this.cbEstado);
-            this.Controls.Add(this.dtpFecha);
-            this.Controls.Add(this.txtDescripcion);
-            this.Controls.Add(this.txtTitulo);
             this.Controls.Add(this.materialCard1);
             this.Name = "FormEdicion";
             this.Sizable = false;
