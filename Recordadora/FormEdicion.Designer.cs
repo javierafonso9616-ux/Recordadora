@@ -33,7 +33,6 @@
             this.txtSolucion = new MaterialSkin.Controls.MaterialMultiLineTextBox2();
             this.dtpFecha = new System.Windows.Forms.DateTimePicker();
             this.cbEstado = new MaterialSkin.Controls.MaterialComboBox();
-            this.btEliminar = new MaterialSkin.Controls.MaterialButton();
             this.btnGuardar = new MaterialSkin.Controls.MaterialButton();
             this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
             this.lbTItuloFormEdicion = new MaterialSkin.Controls.MaterialLabel();
@@ -41,6 +40,7 @@
             this.lbDescripcionFormEdicion = new MaterialSkin.Controls.MaterialLabel();
             this.lbFechaFormEdicion = new MaterialSkin.Controls.MaterialLabel();
             this.lbEstadoFormEdicion = new MaterialSkin.Controls.MaterialLabel();
+            this.btEliminar = new MaterialSkin.Controls.MaterialButton();
             this.materialCard1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -156,26 +156,6 @@
             this.cbEstado.StartIndex = 0;
             this.cbEstado.TabIndex = 4;
             // 
-            // btEliminar
-            // 
-            this.btEliminar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btEliminar.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btEliminar.Depth = 0;
-            this.btEliminar.HighEmphasis = true;
-            this.btEliminar.Icon = null;
-            this.btEliminar.Location = new System.Drawing.Point(711, 516);
-            this.btEliminar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btEliminar.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btEliminar.Name = "btEliminar";
-            this.btEliminar.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btEliminar.Size = new System.Drawing.Size(88, 36);
-            this.btEliminar.TabIndex = 6;
-            this.btEliminar.Text = "Eliminar";
-            this.btEliminar.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btEliminar.UseAccentColor = false;
-            this.btEliminar.UseVisualStyleBackColor = true;
-            this.btEliminar.Click += new System.EventHandler(this.btEliminar_Click);
-            // 
             // btnGuardar
             // 
             this.btnGuardar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -279,6 +259,26 @@
             this.lbEstadoFormEdicion.Size = new System.Drawing.Size(50, 19);
             this.lbEstadoFormEdicion.TabIndex = 8;
             this.lbEstadoFormEdicion.Text = "Estado";
+            // 
+            // btEliminar
+            // 
+            this.btEliminar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btEliminar.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btEliminar.Depth = 0;
+            this.btEliminar.HighEmphasis = true;
+            this.btEliminar.Icon = null;
+            this.btEliminar.Location = new System.Drawing.Point(711, 516);
+            this.btEliminar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btEliminar.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btEliminar.Name = "btEliminar";
+            this.btEliminar.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btEliminar.Size = new System.Drawing.Size(88, 36);
+            this.btEliminar.TabIndex = 6;
+            this.btEliminar.Text = "Eliminar";
+            this.btEliminar.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btEliminar.UseAccentColor = false;
+            this.btEliminar.UseVisualStyleBackColor = true;
+            this.btEliminar.Click += new System.EventHandler(this.btEliminar_Click);
             // 
             // FormEdicion
             // 

@@ -19,13 +19,18 @@ namespace Recordadora
         {
             InitializeComponent();
 
+            FormLogo formLogo = new FormLogo();
+            formLogo.ShowDialog();
+
+
+
             // Activamos DoubleBuffered a nivel de Form
             this.DoubleBuffered = true;
 
             // Gochada para centrar el titulo
-            this.Text = "                                                             " +
-                        "                                                             " +
-                        "                                                   RECORDADORA";
+            this.Text = "                                                              " +
+                        "                                                              " +
+                        "                                                          TAREAS";
 
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
@@ -33,7 +38,7 @@ namespace Recordadora
             materialSkinManager.ColorScheme = new ColorScheme(
                 Primary.Blue900,
                 Primary.Blue900,
-                Primary.Blue200,
+                Primary.Blue400,
                 Accent.Blue700,
                 TextShade.WHITE
             );
@@ -320,6 +325,11 @@ namespace Recordadora
         {
             FormExportar frm = new FormExportar(dgPrincipal, dgPendientes, dgHistorial);
             frm.ShowDialog();
+        }
+
+        private void pictureBoxLogo_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://hospitalcrgijon.com/");
         }
     }
 }

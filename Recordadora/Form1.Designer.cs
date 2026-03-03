@@ -44,17 +44,20 @@
             this.dgHistorial = new System.Windows.Forms.DataGridView();
             this.dgPendientes = new System.Windows.Forms.DataGridView();
             this.dgPrincipal = new System.Windows.Forms.DataGridView();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.materialCardMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
             this.materialCardDataGrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgHistorial)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgPendientes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgPrincipal)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // materialCardMenu
             // 
             this.materialCardMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialCardMenu.Controls.Add(this.pictureBox1);
             this.materialCardMenu.Controls.Add(this.mbExportarExcel);
             this.materialCardMenu.Controls.Add(this.mcCalendario);
             this.materialCardMenu.Controls.Add(this.lbEstado);
@@ -100,7 +103,7 @@
             this.lbEstado.AutoSize = true;
             this.lbEstado.Depth = 0;
             this.lbEstado.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lbEstado.Location = new System.Drawing.Point(1674, 30);
+            this.lbEstado.Location = new System.Drawing.Point(1668, 41);
             this.lbEstado.MouseState = MaterialSkin.MouseState.HOVER;
             this.lbEstado.Name = "lbEstado";
             this.lbEstado.Size = new System.Drawing.Size(50, 19);
@@ -189,6 +192,7 @@
             this.pictureBoxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxLogo.TabIndex = 0;
             this.pictureBoxLogo.TabStop = false;
+            this.pictureBoxLogo.Click += new System.EventHandler(this.pictureBoxLogo_Click);
             // 
             // materialCardDataGrid
             // 
@@ -279,6 +283,15 @@
             this.dgPrincipal.TabIndex = 1;
             this.dgPrincipal.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView_CellDoubleClickGlobal);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::Recordadora.Properties.Resources.filter_list_32dp_1F1F1F_FILL0_wght400_GRAD0_opsz40;
+            this.pictureBox1.Location = new System.Drawing.Point(1630, 70);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(37, 32);
+            this.pictureBox1.TabIndex = 11;
+            this.pictureBox1.TabStop = false;
+            // 
             // Form1
             // 
             this.BackColor = System.Drawing.SystemColors.HighlightText;
@@ -301,6 +314,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgHistorial)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgPendientes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgPrincipal)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -322,6 +336,7 @@
         private MaterialSkin.Controls.MaterialLabel lbPendientes;
         private MaterialSkin.Controls.MaterialDivider materialDivider1;
         private System.Windows.Forms.Button mbExportarExcel;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 
