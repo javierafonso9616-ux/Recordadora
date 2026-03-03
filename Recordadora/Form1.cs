@@ -184,12 +184,16 @@ namespace Recordadora
 
             if (dt != null)
             {
+
                 dgPrincipal.DataSource = dt;
                 ConfigurarGrid(dgPrincipal);
+
 
                 string hoy = DateTime.Now.ToString("yyyy-MM-dd");
                 string manana = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
                 dt.DefaultView.RowFilter = string.Format("FECHA >= '{0}' AND FECHA < '{1}'", hoy, manana);
+
+
 
                 DataView dvPendientes = new DataView(dt);
                 dvPendientes.RowFilter = "ESTADO = 'PENDIENTE'";

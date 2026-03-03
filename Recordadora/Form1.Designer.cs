@@ -30,9 +30,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.materialCardMenu = new MaterialSkin.Controls.MaterialCard();
+            this.mbExportarExcel = new System.Windows.Forms.Button();
             this.mcCalendario = new System.Windows.Forms.MonthCalendar();
             this.lbEstado = new MaterialSkin.Controls.MaterialLabel();
+            this.btnAñadir = new MaterialSkin.Controls.MaterialFloatingActionButton();
             this.cbEstado = new MaterialSkin.Controls.MaterialComboBox();
+            this.txtBuscar = new MaterialSkin.Controls.MaterialTextBox2();
+            this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
             this.materialCardDataGrid = new MaterialSkin.Controls.MaterialCard();
             this.materialDivider1 = new MaterialSkin.Controls.MaterialDivider();
             this.lbHistorial = new MaterialSkin.Controls.MaterialLabel();
@@ -40,16 +44,12 @@
             this.dgHistorial = new System.Windows.Forms.DataGridView();
             this.dgPendientes = new System.Windows.Forms.DataGridView();
             this.dgPrincipal = new System.Windows.Forms.DataGridView();
-            this.mbExportarExcel = new System.Windows.Forms.Button();
-            this.btnAñadir = new MaterialSkin.Controls.MaterialFloatingActionButton();
-            this.txtBuscar = new MaterialSkin.Controls.MaterialTextBox2();
-            this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
             this.materialCardMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
             this.materialCardDataGrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgHistorial)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgPendientes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgPrincipal)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // materialCardMenu
@@ -73,9 +73,23 @@
             this.materialCardMenu.Size = new System.Drawing.Size(1911, 178);
             this.materialCardMenu.TabIndex = 0;
             // 
+            // mbExportarExcel
+            // 
+            this.mbExportarExcel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.mbExportarExcel.FlatAppearance.BorderSize = 0;
+            this.mbExportarExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.mbExportarExcel.ForeColor = System.Drawing.Color.White;
+            this.mbExportarExcel.Image = global::Recordadora.Properties.Resources.icons8_export_excel_32;
+            this.mbExportarExcel.Location = new System.Drawing.Point(1307, 54);
+            this.mbExportarExcel.Name = "mbExportarExcel";
+            this.mbExportarExcel.Size = new System.Drawing.Size(62, 62);
+            this.mbExportarExcel.TabIndex = 10;
+            this.mbExportarExcel.UseVisualStyleBackColor = false;
+            this.mbExportarExcel.Click += new System.EventHandler(this.mbExportarExcel_Click);
+            // 
             // mcCalendario
             // 
-            this.mcCalendario.Location = new System.Drawing.Point(1387, 9);
+            this.mcCalendario.Location = new System.Drawing.Point(1421, 9);
             this.mcCalendario.Name = "mcCalendario";
             this.mcCalendario.TabIndex = 8;
             this.mcCalendario.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.mcCalendario_DateChanged);
@@ -86,12 +100,26 @@
             this.lbEstado.AutoSize = true;
             this.lbEstado.Depth = 0;
             this.lbEstado.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lbEstado.Location = new System.Drawing.Point(1677, 30);
+            this.lbEstado.Location = new System.Drawing.Point(1674, 30);
             this.lbEstado.MouseState = MaterialSkin.MouseState.HOVER;
             this.lbEstado.Name = "lbEstado";
             this.lbEstado.Size = new System.Drawing.Size(50, 19);
             this.lbEstado.TabIndex = 7;
             this.lbEstado.Text = "Estado";
+            // 
+            // btnAñadir
+            // 
+            this.btnAñadir.Depth = 0;
+            this.btnAñadir.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnAñadir.ForeColor = System.Drawing.Color.Blue;
+            this.btnAñadir.Icon = global::Recordadora.Properties.Resources.add_32dp_1F1F1F_FILL0_wght400_GRAD0_opsz40;
+            this.btnAñadir.Location = new System.Drawing.Point(1235, 56);
+            this.btnAñadir.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnAñadir.Name = "btnAñadir";
+            this.btnAñadir.Size = new System.Drawing.Size(56, 56);
+            this.btnAñadir.TabIndex = 4;
+            this.btnAñadir.UseVisualStyleBackColor = false;
+            this.btnAñadir.Click += new System.EventHandler(this.btnAñadir_Click);
             // 
             // cbEstado
             // 
@@ -112,7 +140,7 @@
             "PENDIENTE",
             "REALIZADO",
             "CANCELADO"});
-            this.cbEstado.Location = new System.Drawing.Point(1674, 63);
+            this.cbEstado.Location = new System.Drawing.Point(1671, 63);
             this.cbEstado.MaxDropDownItems = 4;
             this.cbEstado.MouseState = MaterialSkin.MouseState.OUT;
             this.cbEstado.Name = "cbEstado";
@@ -120,6 +148,47 @@
             this.cbEstado.StartIndex = 0;
             this.cbEstado.TabIndex = 3;
             this.cbEstado.SelectedIndexChanged += new System.EventHandler(this.cbEstado_SelectedIndexChanged);
+            // 
+            // txtBuscar
+            // 
+            this.txtBuscar.AnimateReadOnly = true;
+            this.txtBuscar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtBuscar.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtBuscar.Depth = 0;
+            this.txtBuscar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBuscar.HideSelection = true;
+            this.txtBuscar.Hint = "BUSCAR";
+            this.txtBuscar.LeadingIcon = global::Recordadora.Properties.Resources.search_32dp_1F1F1F_FILL0_wght400_GRAD0_opsz40;
+            this.txtBuscar.Location = new System.Drawing.Point(633, 62);
+            this.txtBuscar.MaxLength = 32767;
+            this.txtBuscar.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtBuscar.Name = "txtBuscar";
+            this.txtBuscar.PasswordChar = '\0';
+            this.txtBuscar.PrefixSuffixText = null;
+            this.txtBuscar.ReadOnly = false;
+            this.txtBuscar.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtBuscar.SelectedText = "";
+            this.txtBuscar.SelectionLength = 0;
+            this.txtBuscar.SelectionStart = 0;
+            this.txtBuscar.ShortcutsEnabled = true;
+            this.txtBuscar.Size = new System.Drawing.Size(572, 48);
+            this.txtBuscar.TabIndex = 1;
+            this.txtBuscar.TabStop = false;
+            this.txtBuscar.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtBuscar.TrailingIcon = null;
+            this.txtBuscar.UseAccent = false;
+            this.txtBuscar.UseSystemPasswordChar = false;
+            this.txtBuscar.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged);
+            // 
+            // pictureBoxLogo
+            // 
+            this.pictureBoxLogo.Image = global::Recordadora.Properties.Resources.Logotipo_Cruz_Roja_Horizontal_transparente_letras_negras;
+            this.pictureBoxLogo.Location = new System.Drawing.Point(3, 3);
+            this.pictureBoxLogo.Name = "pictureBoxLogo";
+            this.pictureBoxLogo.Size = new System.Drawing.Size(578, 138);
+            this.pictureBoxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxLogo.TabIndex = 0;
+            this.pictureBoxLogo.TabStop = false;
             // 
             // materialCardDataGrid
             // 
@@ -210,75 +279,6 @@
             this.dgPrincipal.TabIndex = 1;
             this.dgPrincipal.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView_CellDoubleClickGlobal);
             // 
-            // mbExportarExcel
-            // 
-            this.mbExportarExcel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.mbExportarExcel.FlatAppearance.BorderSize = 0;
-            this.mbExportarExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.mbExportarExcel.ForeColor = System.Drawing.Color.White;
-            this.mbExportarExcel.Image = global::Recordadora.Properties.Resources.icons8_export_excel_32;
-            this.mbExportarExcel.Location = new System.Drawing.Point(1297, 54);
-            this.mbExportarExcel.Name = "mbExportarExcel";
-            this.mbExportarExcel.Size = new System.Drawing.Size(62, 62);
-            this.mbExportarExcel.TabIndex = 10;
-            this.mbExportarExcel.UseVisualStyleBackColor = false;
-            this.mbExportarExcel.Click += new System.EventHandler(this.mbExportarExcel_Click);
-            // 
-            // btnAñadir
-            // 
-            this.btnAñadir.Depth = 0;
-            this.btnAñadir.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnAñadir.ForeColor = System.Drawing.Color.Blue;
-            this.btnAñadir.Icon = global::Recordadora.Properties.Resources.add_32dp_1F1F1F_FILL0_wght400_GRAD0_opsz40;
-            this.btnAñadir.Location = new System.Drawing.Point(1235, 56);
-            this.btnAñadir.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnAñadir.Name = "btnAñadir";
-            this.btnAñadir.Size = new System.Drawing.Size(56, 56);
-            this.btnAñadir.TabIndex = 4;
-            this.btnAñadir.UseVisualStyleBackColor = false;
-            this.btnAñadir.Click += new System.EventHandler(this.btnAñadir_Click);
-            // 
-            // txtBuscar
-            // 
-            this.txtBuscar.AnimateReadOnly = true;
-            this.txtBuscar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.txtBuscar.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtBuscar.Depth = 0;
-            this.txtBuscar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBuscar.HideSelection = true;
-            this.txtBuscar.Hint = "BUSCAR";
-            this.txtBuscar.LeadingIcon = global::Recordadora.Properties.Resources.search_32dp_1F1F1F_FILL0_wght400_GRAD0_opsz40;
-            this.txtBuscar.Location = new System.Drawing.Point(633, 62);
-            this.txtBuscar.MaxLength = 32767;
-            this.txtBuscar.MouseState = MaterialSkin.MouseState.OUT;
-            this.txtBuscar.Name = "txtBuscar";
-            this.txtBuscar.PasswordChar = '\0';
-            this.txtBuscar.PrefixSuffixText = null;
-            this.txtBuscar.ReadOnly = false;
-            this.txtBuscar.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.txtBuscar.SelectedText = "";
-            this.txtBuscar.SelectionLength = 0;
-            this.txtBuscar.SelectionStart = 0;
-            this.txtBuscar.ShortcutsEnabled = true;
-            this.txtBuscar.Size = new System.Drawing.Size(572, 48);
-            this.txtBuscar.TabIndex = 1;
-            this.txtBuscar.TabStop = false;
-            this.txtBuscar.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.txtBuscar.TrailingIcon = null;
-            this.txtBuscar.UseAccent = false;
-            this.txtBuscar.UseSystemPasswordChar = false;
-            this.txtBuscar.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged);
-            // 
-            // pictureBoxLogo
-            // 
-            this.pictureBoxLogo.Image = global::Recordadora.Properties.Resources.Logotipo_Cruz_Roja_Horizontal_transparente_letras_negras;
-            this.pictureBoxLogo.Location = new System.Drawing.Point(3, 3);
-            this.pictureBoxLogo.Name = "pictureBoxLogo";
-            this.pictureBoxLogo.Size = new System.Drawing.Size(578, 138);
-            this.pictureBoxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxLogo.TabIndex = 0;
-            this.pictureBoxLogo.TabStop = false;
-            // 
             // Form1
             // 
             this.BackColor = System.Drawing.SystemColors.HighlightText;
@@ -295,12 +295,12 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.materialCardMenu.ResumeLayout(false);
             this.materialCardMenu.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
             this.materialCardDataGrid.ResumeLayout(false);
             this.materialCardDataGrid.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgHistorial)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgPendientes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgPrincipal)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -23,6 +23,8 @@ namespace Recordadora
             this.Text = "Nueva Tarea";
             btEliminar.Visible = false; // Si es nuevo, no se puede eliminar
             cbEstado.SelectedIndex = 0; // PENDIENTE por defecto
+
+            ActiveControl = txtTitulo; // Ponemos el foco en el título para que el usuario pueda empezar a escribir directamente
         }
 
         // CONSTRUCTOR PARA EDITAR UNA TAREA EXISTENTE (El que usará el doble clic)
@@ -40,6 +42,8 @@ namespace Recordadora
             txtDescripcion.Text = descripcion;
             txtSolucion.Text = solucion;
             cbEstado.SelectedItem = estado;
+
+            ActiveControl = txtTitulo; // Ponemos el foco en el título para que el usuario pueda empezar a escribir directamente
         }
 
         private void ConfigurarMaterialSkin()
