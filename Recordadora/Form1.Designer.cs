@@ -30,10 +30,11 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.materialCardMenu = new MaterialSkin.Controls.MaterialCard();
-            this.mbExportarExcel = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btExportarExcel = new System.Windows.Forms.Button();
             this.mcCalendario = new System.Windows.Forms.MonthCalendar();
             this.lbEstado = new MaterialSkin.Controls.MaterialLabel();
-            this.btnAñadir = new MaterialSkin.Controls.MaterialFloatingActionButton();
+            this.btAñadir = new MaterialSkin.Controls.MaterialFloatingActionButton();
             this.cbEstado = new MaterialSkin.Controls.MaterialComboBox();
             this.txtBuscar = new MaterialSkin.Controls.MaterialTextBox2();
             this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
@@ -44,24 +45,23 @@
             this.dgHistorial = new System.Windows.Forms.DataGridView();
             this.dgPendientes = new System.Windows.Forms.DataGridView();
             this.dgPrincipal = new System.Windows.Forms.DataGridView();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.materialCardMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
             this.materialCardDataGrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgHistorial)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgPendientes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgPrincipal)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // materialCardMenu
             // 
             this.materialCardMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.materialCardMenu.Controls.Add(this.pictureBox1);
-            this.materialCardMenu.Controls.Add(this.mbExportarExcel);
+            this.materialCardMenu.Controls.Add(this.btExportarExcel);
             this.materialCardMenu.Controls.Add(this.mcCalendario);
             this.materialCardMenu.Controls.Add(this.lbEstado);
-            this.materialCardMenu.Controls.Add(this.btnAñadir);
+            this.materialCardMenu.Controls.Add(this.btAñadir);
             this.materialCardMenu.Controls.Add(this.cbEstado);
             this.materialCardMenu.Controls.Add(this.txtBuscar);
             this.materialCardMenu.Controls.Add(this.pictureBoxLogo);
@@ -76,19 +76,28 @@
             this.materialCardMenu.Size = new System.Drawing.Size(1911, 178);
             this.materialCardMenu.TabIndex = 0;
             // 
-            // mbExportarExcel
+            // pictureBox1
             // 
-            this.mbExportarExcel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.mbExportarExcel.FlatAppearance.BorderSize = 0;
-            this.mbExportarExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.mbExportarExcel.ForeColor = System.Drawing.Color.White;
-            this.mbExportarExcel.Image = global::Recordadora.Properties.Resources.icons8_export_excel_32;
-            this.mbExportarExcel.Location = new System.Drawing.Point(1307, 54);
-            this.mbExportarExcel.Name = "mbExportarExcel";
-            this.mbExportarExcel.Size = new System.Drawing.Size(62, 62);
-            this.mbExportarExcel.TabIndex = 10;
-            this.mbExportarExcel.UseVisualStyleBackColor = false;
-            this.mbExportarExcel.Click += new System.EventHandler(this.mbExportarExcel_Click);
+            this.pictureBox1.Image = global::Recordadora.Properties.Resources.filter_list_32dp_1F1F1F_FILL0_wght400_GRAD0_opsz40;
+            this.pictureBox1.Location = new System.Drawing.Point(1630, 70);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(37, 32);
+            this.pictureBox1.TabIndex = 11;
+            this.pictureBox1.TabStop = false;
+            // 
+            // btExportarExcel
+            // 
+            this.btExportarExcel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.btExportarExcel.FlatAppearance.BorderSize = 0;
+            this.btExportarExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btExportarExcel.ForeColor = System.Drawing.Color.White;
+            this.btExportarExcel.Image = global::Recordadora.Properties.Resources.icons8_export_excel_32;
+            this.btExportarExcel.Location = new System.Drawing.Point(1307, 54);
+            this.btExportarExcel.Name = "btExportarExcel";
+            this.btExportarExcel.Size = new System.Drawing.Size(62, 62);
+            this.btExportarExcel.TabIndex = 10;
+            this.btExportarExcel.UseVisualStyleBackColor = false;
+            this.btExportarExcel.Click += new System.EventHandler(this.btExportarExcel_Click);
             // 
             // mcCalendario
             // 
@@ -110,19 +119,19 @@
             this.lbEstado.TabIndex = 7;
             this.lbEstado.Text = "Estado";
             // 
-            // btnAñadir
+            // btAñadir
             // 
-            this.btnAñadir.Depth = 0;
-            this.btnAñadir.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnAñadir.ForeColor = System.Drawing.Color.Blue;
-            this.btnAñadir.Icon = global::Recordadora.Properties.Resources.add_32dp_1F1F1F_FILL0_wght400_GRAD0_opsz40;
-            this.btnAñadir.Location = new System.Drawing.Point(1235, 56);
-            this.btnAñadir.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnAñadir.Name = "btnAñadir";
-            this.btnAñadir.Size = new System.Drawing.Size(56, 56);
-            this.btnAñadir.TabIndex = 4;
-            this.btnAñadir.UseVisualStyleBackColor = false;
-            this.btnAñadir.Click += new System.EventHandler(this.btnAñadir_Click);
+            this.btAñadir.Depth = 0;
+            this.btAñadir.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btAñadir.ForeColor = System.Drawing.Color.Blue;
+            this.btAñadir.Icon = global::Recordadora.Properties.Resources.add_32dp_1F1F1F_FILL0_wght400_GRAD0_opsz40;
+            this.btAñadir.Location = new System.Drawing.Point(1235, 56);
+            this.btAñadir.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btAñadir.Name = "btAñadir";
+            this.btAñadir.Size = new System.Drawing.Size(56, 56);
+            this.btAñadir.TabIndex = 4;
+            this.btAñadir.UseVisualStyleBackColor = false;
+            this.btAñadir.Click += new System.EventHandler(this.btnAñadir_Click);
             // 
             // cbEstado
             // 
@@ -181,6 +190,7 @@
             this.txtBuscar.TrailingIcon = null;
             this.txtBuscar.UseAccent = false;
             this.txtBuscar.UseSystemPasswordChar = false;
+            this.txtBuscar.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBuscar_KeyDown);
             this.txtBuscar.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged);
             // 
             // pictureBoxLogo
@@ -283,15 +293,6 @@
             this.dgPrincipal.TabIndex = 1;
             this.dgPrincipal.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView_CellDoubleClickGlobal);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::Recordadora.Properties.Resources.filter_list_32dp_1F1F1F_FILL0_wght400_GRAD0_opsz40;
-            this.pictureBox1.Location = new System.Drawing.Point(1630, 70);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(37, 32);
-            this.pictureBox1.TabIndex = 11;
-            this.pictureBox1.TabStop = false;
-            // 
             // Form1
             // 
             this.BackColor = System.Drawing.SystemColors.HighlightText;
@@ -308,13 +309,13 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.materialCardMenu.ResumeLayout(false);
             this.materialCardMenu.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
             this.materialCardDataGrid.ResumeLayout(false);
             this.materialCardDataGrid.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgHistorial)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgPendientes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgPrincipal)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -327,7 +328,7 @@
         private System.Windows.Forms.PictureBox pictureBoxLogo;
         private MaterialSkin.Controls.MaterialTextBox2 txtBuscar;
         private MaterialSkin.Controls.MaterialComboBox cbEstado;
-        private MaterialSkin.Controls.MaterialFloatingActionButton btnAñadir;
+        private MaterialSkin.Controls.MaterialFloatingActionButton btAñadir;
         private MaterialSkin.Controls.MaterialLabel lbEstado;
         private System.Windows.Forms.MonthCalendar mcCalendario;
         private System.Windows.Forms.DataGridView dgHistorial;
@@ -335,7 +336,7 @@
         private MaterialSkin.Controls.MaterialLabel lbHistorial;
         private MaterialSkin.Controls.MaterialLabel lbPendientes;
         private MaterialSkin.Controls.MaterialDivider materialDivider1;
-        private System.Windows.Forms.Button mbExportarExcel;
+        private System.Windows.Forms.Button btExportarExcel;
         private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
