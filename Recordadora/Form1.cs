@@ -68,78 +68,54 @@ namespace Recordadora
             ActiveControl = pictureBoxLogo;
         }
 
-        // MÉTODO PARA ACTIVAR DOUBLE BUFFER EN LOS DATAGRIDVIEW Y EVITAR EL PARPADEO AL CARGAR DATOS
-        private void HabilitarDoubleBuffer(DataGridView dgv)
+
+        //------------------------------------------------------------------------------------------------------
+        // CARGA Y CONFIGURACIONES
+        //------------------------------------------------------------------------------------------------------
+
+        public void CargarDatos()
         {
-            typeof(DataGridView).InvokeMember("DoubleBuffered",
-                System.Reflection.BindingFlags.NonPublic |
-                System.Reflection.BindingFlags.Instance |
-                System.Reflection.BindingFlags.SetProperty,
-                null, dgv, new object[] { true });
-        }
+            // Suspendemos el dibujo para que no se vea el proceso de carga
+            dgPrincipal.SuspendLayout();
+            dgPendientes.SuspendLayout();
+            dgHistorial.SuspendLayout();
 
-        // BOTON REDONDO (NI TOCAR)
-        private void BotonRedondoExcel()
-        {
-            btExportarExcel.Text = "";
-            btExportarExcel.BackColor = Color.White;
-            btExportarExcel.FlatStyle = FlatStyle.Flat;
-            btExportarExcel.FlatAppearance.BorderSize = 0;
+            // CONSULTA COMPLETA PARA OBTENER TODOS LOS DATOS DE LA TABLA,
+            // LUEGO FILTRAREMOS EN MEMORIA PARA MOSTRAR SOLO LO NECESARIO EN CADA GRID
+            string consulta = "SELECT ID, FECHA, TITULO, DESCRIPCION, SOLUCION, ESTADO FROM TABLA_RECORDADORA";
+            DataTable dt = ad.ObtenerDatos(consulta);
 
-            bool ratonEncima = false;
-
-            btExportarExcel.MouseEnter += (s, ev) => { ratonEncima = true; btExportarExcel.Invalidate(); };
-            btExportarExcel.MouseLeave += (s, ev) => { ratonEncima = false; btExportarExcel.Invalidate(); };
-
-            btExportarExcel.Paint += (s, ev) =>
+            if (dt != null)
             {
-                ev.Graphics.Clear(Color.White);
-                ev.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
-                int margen = 4;
-                int anchoReal = btExportarExcel.Width - margen - 1;
-                int altoReal = btExportarExcel.Height - margen - 1;
+                //DATA SOURCE PRINCIPAL: MOSTRAMOS SOLO LAS TAREAS DEL DÍA SELECCIONADO (POR DEFECTO HOY)
+                dgPrincipal.DataSource = dt;
+                ConfigurarGrid(dgPrincipal);
+                string hoy = DateTime.Now.ToString("yyyy-MM-dd");
+                string manana = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
+                dt.DefaultView.RowFilter = string.Format("FECHA >= '{0}' AND FECHA < '{1}'", hoy, manana);
 
-                using (SolidBrush brochaSombra = new SolidBrush(Color.FromArgb(50, 0, 0, 0)))
-                {
-                    ev.Graphics.FillEllipse(brochaSombra, 2, 3, anchoReal, altoReal);
-                }
+                //DATA SOURCE PENDIENTES MOSTRAMOS SOLO LAS TAREAS PENDIENTES ORDENADAS POR FECHA ASCENDENTE
 
-                using (SolidBrush brochaVerde = new SolidBrush(Color.FromArgb(0, 192, 0)))
-                {
-                    ev.Graphics.FillEllipse(brochaVerde, 0, 0, anchoReal, altoReal);
-                }
+                DataView dvPendientes = new DataView(dt);
+                dvPendientes.RowFilter = "ESTADO = 'PENDIENTE'";
+                dvPendientes.Sort = "FECHA ASC";
+                dgPendientes.DataSource = dvPendientes;
+                ConfigurarGrid(dgPendientes);
 
-                if (ratonEncima)
-                {
-                    using (SolidBrush brochaHover = new SolidBrush(Color.FromArgb(50, 255, 255, 255)))
-                    {
-                        ev.Graphics.FillEllipse(brochaHover, 0, 0, anchoReal, altoReal);
-                    }
-                }
+                //DATA SOURCE HISTORIAL MOSTRAMOS SOLO LAS TAREAS COMPLETADAS ORDENADAS POR FECHA DESCENDENTE
+                DataView dvHistorial = new DataView(dt);
+                dvHistorial.Sort = "FECHA DESC";
+                dgHistorial.DataSource = dvHistorial;
+                ConfigurarGrid(dgHistorial);
+            }
 
-                Image iconoExcel = Properties.Resources.icons8_export_excel_32;
-                if (iconoExcel != null)
-                {
-                    int x = (anchoReal - iconoExcel.Width) / 2;
-                    int y = (altoReal - iconoExcel.Height) / 2;
-                    ev.Graphics.DrawImage(iconoExcel, x, y, iconoExcel.Width, iconoExcel.Height);
-                }
-            };
-
-
+            // Reanudamos el dibujo
+            dgPrincipal.ResumeLayout();
+            dgPendientes.ResumeLayout();
+            dgHistorial.ResumeLayout();
         }
 
-        // CONFIGURACION DE CALENDARIO PARA QUE COINCIDA CON EL ESTILO MATERIAL Y SEA MAS LEGIBLE
-        private void ConfigurarCalendar()
-        {
-            mcCalendario.TitleBackColor = Color.FromArgb(13, 71, 161);
-            mcCalendario.TitleForeColor = Color.White;
-            mcCalendario.TrailingForeColor = Color.FromArgb(230, 230, 230);
-            mcCalendario.Font = new Font("Segoe UI", 15F, FontStyle.Regular);
-        }
-
-        // CONFIGURACION DE GRIDS PARA QUE COINCIDA CON EL ESTILO MATERIAL, SEA MAS LEGIBLE Y EVITAR EL PARPADEO AL CARGAR DATOS
         public void ConfigurarGrid(DataGridView grid)
         {
             Color azulOscuro = Color.FromArgb(13, 71, 161);
@@ -193,53 +169,115 @@ namespace Recordadora
             grid.AutoResizeRows(DataGridViewAutoSizeRowsMode.DisplayedCells);
         }
 
-        public void CargarDatos()
+        private void ConfigurarCalendar()
         {
-            // Suspendemos el dibujo para que no se vea el proceso de carga
-            dgPrincipal.SuspendLayout();
-            dgPendientes.SuspendLayout();
-            dgHistorial.SuspendLayout();
-
-            // CONSULTA COMPLETA PARA OBTENER TODOS LOS DATOS DE LA TABLA,
-            // LUEGO FILTRAREMOS EN MEMORIA PARA MOSTRAR SOLO LO NECESARIO EN CADA GRID
-            string consulta = "SELECT ID, FECHA, TITULO, DESCRIPCION, SOLUCION, ESTADO FROM TABLA_RECORDADORA";
-            DataTable dt = ad.ObtenerDatos(consulta);
-
-            if (dt != null)
-            {
-
-                //DATA SOURCE PRINCIPAL: MOSTRAMOS SOLO LAS TAREAS DEL DÍA SELECCIONADO (POR DEFECTO HOY)
-                dgPrincipal.DataSource = dt;
-                ConfigurarGrid(dgPrincipal);
-                string hoy = DateTime.Now.ToString("yyyy-MM-dd");
-                string manana = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
-                dt.DefaultView.RowFilter = string.Format("FECHA >= '{0}' AND FECHA < '{1}'", hoy, manana);
-
-                //DATA SOURCE PENDIENTES MOSTRAMOS SOLO LAS TAREAS PENDIENTES ORDENADAS POR FECHA ASCENDENTE
-
-                DataView dvPendientes = new DataView(dt);
-                dvPendientes.RowFilter = "ESTADO = 'PENDIENTE'";
-                dvPendientes.Sort = "FECHA ASC";
-                dgPendientes.DataSource = dvPendientes;
-                ConfigurarGrid(dgPendientes);
-
-                //DATA SOURCE HISTORIAL MOSTRAMOS SOLO LAS TAREAS COMPLETADAS ORDENADAS POR FECHA DESCENDENTE
-                DataView dvHistorial = new DataView(dt);
-                dvHistorial.Sort = "FECHA DESC";
-                dgHistorial.DataSource = dvHistorial;
-                ConfigurarGrid(dgHistorial);
-            }
-
-            // Reanudamos el dibujo
-            dgPrincipal.ResumeLayout();
-            dgPendientes.ResumeLayout();
-            dgHistorial.ResumeLayout();
+            mcCalendario.TitleBackColor = Color.FromArgb(13, 71, 161);
+            mcCalendario.TitleForeColor = Color.White;
+            mcCalendario.TrailingForeColor = Color.FromArgb(230, 230, 230);
+            mcCalendario.Font = new Font("Segoe UI", 15F, FontStyle.Regular);
         }
 
-        // FILTRO POR FECHA: AL CAMBIAR EL MES O AÑO EN EL CALENDARIO, MOSTRAMOS
-        // SOLO LAS TAREAS DE ESE MES. SI SE SELECCIONA UN RANGO DENTRO DEL MISMO MES, MOSTRAMOS SOLO LAS TAREAS DE ESE RANGO
+        private void HabilitarDoubleBuffer(DataGridView dgv)
+        {
+            // MÉTODO PARA ACTIVAR DOUBLE BUFFER EN LOS DATAGRIDVIEW Y EVITAR EL PARPADEO AL CARGAR DATOS
+
+            typeof(DataGridView).InvokeMember("DoubleBuffered",
+                System.Reflection.BindingFlags.NonPublic |
+                System.Reflection.BindingFlags.Instance |
+                System.Reflection.BindingFlags.SetProperty,
+                null, dgv, new object[] { true });
+        }
+
+        //------------------------------------------------------------------------------------------------------
+        // BOTONES
+        //------------------------------------------------------------------------------------------------------
+
+        private void btnAñadir_Click(object sender, EventArgs e)
+        {
+            FormEdicion frm = new FormEdicion();
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                // SI SE GUARDAN LOS CAMBIOS, RECARGAMOS LOS DATOS EN LOS GRIDS
+                CargarDatos();
+            }
+        }
+
+        private void btExportarExcel_Click(object sender, EventArgs e)
+        {
+            // BOTON EXPORTAR A EXCEL, ABRE EL FORMULARIO DE EXPORTACION PASANDO LOS 3 GRIDS
+            // COMO PARAMETRO PARA QUE EL USUARIO PUEDA SELECCIONAR CUAL DE LOS 3 GRIDS DESEA EXPORTAR A EXCEL
+            FormExportar frm = new FormExportar(dgPrincipal, dgPendientes, dgHistorial);
+            frm.ShowDialog();
+        }
+
+        // BOTON PERSONALIZADO REDONDO (NI TOCAR)
+        private void BotonRedondoExcel()
+        {
+            btExportarExcel.Text = "";
+            btExportarExcel.BackColor = Color.White;
+            btExportarExcel.FlatStyle = FlatStyle.Flat;
+            btExportarExcel.FlatAppearance.BorderSize = 0;
+
+            bool ratonEncima = false;
+
+            btExportarExcel.MouseEnter += (s, ev) => { ratonEncima = true; btExportarExcel.Invalidate(); };
+            btExportarExcel.MouseLeave += (s, ev) => { ratonEncima = false; btExportarExcel.Invalidate(); };
+
+            btExportarExcel.Paint += (s, ev) =>
+            {
+                ev.Graphics.Clear(Color.White);
+                ev.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+                int margen = 4;
+                int anchoReal = btExportarExcel.Width - margen - 1;
+                int altoReal = btExportarExcel.Height - margen - 1;
+
+                using (SolidBrush brochaSombra = new SolidBrush(Color.FromArgb(50, 0, 0, 0)))
+                {
+                    ev.Graphics.FillEllipse(brochaSombra, 2, 3, anchoReal, altoReal);
+                }
+
+                using (SolidBrush brochaVerde = new SolidBrush(Color.FromArgb(0, 192, 0)))
+                {
+                    ev.Graphics.FillEllipse(brochaVerde, 0, 0, anchoReal, altoReal);
+                }
+
+                if (ratonEncima)
+                {
+                    using (SolidBrush brochaHover = new SolidBrush(Color.FromArgb(50, 255, 255, 255)))
+                    {
+                        ev.Graphics.FillEllipse(brochaHover, 0, 0, anchoReal, altoReal);
+                    }
+                }
+
+                Image iconoExcel = Properties.Resources.icons8_export_excel_32;
+                if (iconoExcel != null)
+                {
+                    int x = (anchoReal - iconoExcel.Width) / 2;
+                    int y = (altoReal - iconoExcel.Height) / 2;
+                    ev.Graphics.DrawImage(iconoExcel, x, y, iconoExcel.Width, iconoExcel.Height);
+                }
+            };
+
+
+        }
+
+        private void pictureBoxLogo_Click(object sender, EventArgs e)
+        {
+            // AL HACER CLICK EN EL LOGO, SE ABRE LA PAGINA WEB DEL HOSPITAL
+            System.Diagnostics.Process.Start("https://hospitalcrgijon.com/");
+        }
+
+
+        //------------------------------------------------------------------------------------------------------
+        // EVENTOS
+        //------------------------------------------------------------------------------------------------------
+
         private void mcCalendario_DateChanged(object sender, DateRangeEventArgs e)
         {
+
+            // FILTRO POR FECHA: AL CAMBIAR EL MES O AÑO EN EL CALENDARIO, MOSTRAMOS
+            // SOLO LAS TAREAS DE ESE MES. SI SE SELECCIONA UN RANGO DENTRO DEL MISMO MES, MOSTRAMOS SOLO LAS TAREAS DE ESE RANGO
             if (dgPrincipal.DataSource is DataTable dt)
             {
                 DataView dv = dt.DefaultView;
@@ -262,9 +300,9 @@ namespace Recordadora
             }
         }
 
-        // AL HACER CLICK EN EL LINK DE HOY, MOSTRAMOS SOLO LAS TAREAS DEL DÍA ACTUAL Y RESETEAMOS EL CALENDARIO A HOY
         private void mcCalendario_MouseUp(object sender, MouseEventArgs e)
         {
+            // AL HACER CLICK EN EL LINK DE HOY, MOSTRAMOS SOLO LAS TAREAS DEL DÍA ACTUAL Y RESETEAMOS EL CALENDARIO A HOY
             MonthCalendar.HitTestInfo info = mcCalendario.HitTest(e.X, e.Y);
             if (info.HitArea == MonthCalendar.HitArea.TodayLink)
             {
@@ -276,11 +314,12 @@ namespace Recordadora
             }
         }
 
-        // FILTRO POR ESTADO: AL SELECCIONAR UN ESTADO EN EL COMBOBOX,
-        // MOSTRAMOS SOLO LAS TAREAS CON ESE ESTADO. SI SE SELECCIONA LA OPCION
-        // DE "SELECCIONAR UN ESTADO", MOSTRAMOS TODAS LAS TAREAS DEL MES SELECCIONADO
         private void cbEstado_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+            // FILTRO POR ESTADO: AL SELECCIONAR UN ESTADO EN EL COMBOBOX,
+            // MOSTRAMOS SOLO LAS TAREAS CON ESE ESTADO. SI SE SELECCIONA LA OPCION
+            // DE "SELECCIONAR UN ESTADO", MOSTRAMOS TODAS LAS TAREAS DEL MES SELECCIONADO
             if (dgPrincipal.DataSource is DataTable dt)
             {
                 DataView dv = dt.DefaultView;
@@ -297,12 +336,41 @@ namespace Recordadora
             }
         }
 
-        // FILTRO POR TEXTO: AL ESCRIBIR EN EL TEXTBOX DE BUSQUEDA,
-        // MOSTRAMOS SOLO LAS TAREAS QUE CONTENGAN EL TEXTO EN EL TITULO, DESCRIPCION O SOLUCION
+        private void DataGridView_CellDoubleClickGlobal(object sender, DataGridViewCellEventArgs e)
+        {
+            // AL HACER DOBLE CLICK EN CUALQUIER FILA DE CUALQUIER GRID,
+            // SE ABRE EL FORMULARIO DE EDICION CON LOS DATOS DE ESA TAREA.
+            // AL GUARDAR LOS CAMBIOS O ELIMINAR LA TAREA, SE RECARGAN LOS DATOS EN LOS GRIDS
+            if (e.RowIndex >= 0)
+            {
+                DataGridView gridClicado = sender as DataGridView;
+                DataGridViewRow fila = gridClicado.Rows[e.RowIndex];
 
+                int idTarea = Convert.ToInt32(fila.Cells["ID"].Value);
+                DateTime fecha = Convert.ToDateTime(fila.Cells["FECHA"].Value);
+                string titulo = fila.Cells["TITULO"].Value?.ToString() ?? "";
+                string descripcion = fila.Cells["DESCRIPCION"].Value?.ToString() ?? "";
+                string solucion = fila.Cells["SOLUCION"].Value?.ToString() ?? "";
+                string estado = fila.Cells["ESTADO"].Value?.ToString() ?? "";
+
+                //ABRIMOS EL FORMULARIO DE EDICION PASANDO LOS DATOS DE LA TAREA SELECCIONADA
+                FormEdicion frm = new FormEdicion(idTarea, fecha, titulo, descripcion, solucion, estado);
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    // SI SE GUARDAN LOS CAMBIOS O SE ELIMINA LA TAREA, RECARGAMOS LOS DATOS EN LOS GRIDS
+                    CargarDatos();
+                }
+            }
+        }
+
+        //------------------------------------------------------------------------------------------------------
+        // TEXTBOX
+        //------------------------------------------------------------------------------------------------------
 
         private void txtBuscar_TextChanged(object sender, EventArgs e)
         {
+            // FILTRO POR TEXTO: AL ESCRIBIR EN EL TEXTBOX DE BUSQUEDA,
+            // MOSTRAMOS SOLO LAS TAREAS QUE CONTENGAN EL TEXTO EN EL TITULO, DESCRIPCION O SOLUCION
             string busqueda = txtBuscar.Text.Trim();
 
 
@@ -327,10 +395,12 @@ namespace Recordadora
                 }
             }
         }
-        // CUANDO EL USUARIO PRESIONA ENTER EN EL TEXTBOX DE BUSQUEDA,
-        // SI EL TEXTO ES UNA SENTENCIA SQL, LA EJECUTAMOS Y MOSTRAMOS LOS RESULTADOS EN EL GRID PRINCIPAL
+
+
         private void txtBuscar_KeyDown(object sender, KeyEventArgs e)
         {
+            // CUANDO EL USUARIO PRESIONA ENTER EN EL TEXTBOX DE BUSQUEDA,
+            // SI EL TEXTO ES UNA SENTENCIA SQL, LA EJECUTAMOS Y MOSTRAMOS LOS RESULTADOS EN EL GRID PRINCIPAL
             if (e.KeyCode == Keys.Enter)
             {
                 e.Handled = true; // Evita que el control procese la tecla Enter
@@ -370,58 +440,6 @@ namespace Recordadora
                     }
                 }
             }
-        }
-
-        // AL HACER DOBLE CLICK EN CUALQUIER FILA DE CUALQUIER GRID,
-        // SE ABRE EL FORMULARIO DE EDICION CON LOS DATOS DE ESA TAREA.
-        // AL GUARDAR LOS CAMBIOS O ELIMINAR LA TAREA, SE RECARGAN LOS DATOS EN LOS GRIDS
-        private void DataGridView_CellDoubleClickGlobal(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                DataGridView gridClicado = sender as DataGridView;
-                DataGridViewRow fila = gridClicado.Rows[e.RowIndex];
-
-                int idTarea = Convert.ToInt32(fila.Cells["ID"].Value);
-                DateTime fecha = Convert.ToDateTime(fila.Cells["FECHA"].Value);
-                string titulo = fila.Cells["TITULO"].Value?.ToString() ?? "";
-                string descripcion = fila.Cells["DESCRIPCION"].Value?.ToString() ?? "";
-                string solucion = fila.Cells["SOLUCION"].Value?.ToString() ?? "";
-                string estado = fila.Cells["ESTADO"].Value?.ToString() ?? "";
-
-                //ABRIMOS EL FORMULARIO DE EDICION PASANDO LOS DATOS DE LA TAREA SELECCIONADA
-                FormEdicion frm = new FormEdicion(idTarea, fecha, titulo, descripcion, solucion, estado);
-                if (frm.ShowDialog() == DialogResult.OK)
-                {
-                    // SI SE GUARDAN LOS CAMBIOS O SE ELIMINA LA TAREA, RECARGAMOS LOS DATOS EN LOS GRIDS
-                    CargarDatos();
-                }
-            }
-        }
-
-        // BOTONO AÑADIR, ABRE UN FOMULARIO DE EDICION EN BLANCO
-        private void btnAñadir_Click(object sender, EventArgs e)
-        {
-            FormEdicion frm = new FormEdicion();
-            if (frm.ShowDialog() == DialogResult.OK)
-            {
-                // SI SE GUARDAN LOS CAMBIOS, RECARGAMOS LOS DATOS EN LOS GRIDS
-                CargarDatos();
-            }
-        }
-
-        // BOTON EXPORTAR A EXCEL, ABRE EL FORMULARIO DE EXPORTACION PASANDO LOS 3 GRIDS
-        // COMO PARAMETRO PARA QUE EL USUARIO PUEDA SELECCIONAR CUAL DE LOS 3 GRIDS DESEA EXPORTAR A EXCEL
-        private void btExportarExcel_Click(object sender, EventArgs e)
-        {
-            FormExportar frm = new FormExportar(dgPrincipal, dgPendientes, dgHistorial);
-            frm.ShowDialog();
-        }
-
-        // AL HACER CLICK EN EL LOGO, SE ABRE LA PAGINA WEB DEL HOSPITAL
-        private void pictureBoxLogo_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start("https://hospitalcrgijon.com/");
         }
 
 

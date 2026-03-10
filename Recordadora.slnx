@@ -1,4 +1,6 @@
 <Solution>
+  <Project Path="Recordadora-Instalador/Recordadora-Instalador.vdproj" Type="Installer">
+    <Build />
+  </Project>
   <Project Path="Recordadora/Recordadora.csproj" Id="c2aa4709-10bc-4a3d-aea0-08902a49bde6" />
-  <Project Path="Recordadora_instalador/Recordadora_instalador.vdproj" Type="Installer" />
 </Solution>
