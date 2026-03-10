@@ -10,18 +10,27 @@ namespace Recordadora
 {
     public partial class Form1 : MaterialForm
     {
-
+        
         AccesoDatos.Datos ad = new AccesoDatos.Datos();
         private int mesActual = DateTime.Now.Month;
         private int anioActual = DateTime.Now.Year;
 
+       
+        //----------------------------------------------------------------------
+        // CONSTRUCTOR
+        //----------------------------------------------------------------------
+         
         public Form1()
         {
+            
             InitializeComponent();
 
-            // comentar estas dos lineas para quitar el logo de carga inicial
-            // FormLogo formLogo = new FormLogo();
-            // formLogo.ShowDialog();
+           
+            // descomentar estas dos lineas para poner el logo de carga inicial
+            /* 
+             * FormLogo formLogo = new FormLogo();
+                formLogo.ShowDialog();
+            */
 
 
 
@@ -33,7 +42,7 @@ namespace Recordadora
                         "                                                              " +
                         "                                                          TAREAS";
 
-            // MARETIAL SKIN MANAGER PARA EL TEMA DE ESTILOS DE MATERIAL DESIGN (GOOGLE ANDROID)
+            // MATERIAL SKIN MANAGER PARA EL TEMA DE ESTILOS DE MATERIAL DESIGN (GOOGLE ANDROID)
             var materialSkinManager = MaterialSkinManager.Instance;
 
             materialSkinManager.AddFormToManage(this);
@@ -45,13 +54,17 @@ namespace Recordadora
                 Accent.Blue700,// COLOR DE LOS BOTONES DE ACCION (BOTON AÑADIR, BOTON EXPORTAR, ETC)
                 TextShade.WHITE // COLOR DE LOS TEXTOS (TITULOS, TEXTO DE LOS BOTONES, ETC)
             );
-
+            // FIN MATERIAL SKIN MANAGER
 
 
             // Maximizamos antes de mostrar para evitar saltos de resolución
             this.MaximizedBounds = Screen.PrimaryScreen.WorkingArea;
             this.WindowState = FormWindowState.Maximized;
         }
+
+        //--------------------------------------------------------------------------------------
+        // lOAD
+        //--------------------------------------------------------------------------------------
 
         private void Form1_Load(object sender, System.EventArgs e)
         {

@@ -12,7 +12,10 @@ namespace Recordadora
         private int idTareaActual = 0;
         AccesoDatos.Datos ad = new AccesoDatos.Datos();
 
+        // -------------------------------------------------------------------------
         // CONSTRUCTOR PARA CREAR UNA TAREA NUEVA
+        // -------------------------------------------------------------------------
+
         public FormEdicion()
         {
             InitializeComponent();
@@ -27,7 +30,10 @@ namespace Recordadora
             ActiveControl = txtTitulo; // Ponemos el foco en el título para que el usuario pueda empezar a escribir directamente
         }
 
-        // CONSTRUCTOR PARA EDITAR UNA TAREA EXISTENTE (El que usará el doble clic)
+        // -------------------------------------------------------------------------
+        // CONSTRUCTOR PARA EDITAR UNA TAREA
+        // -------------------------------------------------------------------------
+        
         public FormEdicion(int id, DateTime fecha, string titulo, string descripcion, string solucion, string estado)
         {
             InitializeComponent();
@@ -46,6 +52,9 @@ namespace Recordadora
             ActiveControl = txtTitulo; // Ponemos el foco en el título para que el usuario pueda empezar a escribir directamente
         }
 
+        // -------------------------------------------------------------------------
+        // CONFIGURACIÓN DE MATERIAL SKIN
+        // -------------------------------------------------------------------------
         private void ConfigurarMaterialSkin()
         {
             var materialSkinManager = MaterialSkinManager.Instance;
@@ -59,7 +68,9 @@ namespace Recordadora
                 TextShade.WHITE);
         }
 
-
+        //-------------------------------------------------------------------------
+        // BOTONES
+        //-------------------------------------------------------------------------
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {

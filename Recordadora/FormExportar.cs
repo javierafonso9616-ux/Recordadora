@@ -13,7 +13,7 @@ namespace Recordadora
         private DataGridView gridPendientes;
         private DataGridView gridHistorial;
 
-        // Modificamos el constructor para que exija que le pasen los 3 grids
+        // Constructor de la ventana de exportación pasando los grids
         public FormExportar(DataGridView principal, DataGridView pendientes, DataGridView historial)
         {
             InitializeComponent();
@@ -29,15 +29,19 @@ namespace Recordadora
             materialSkinManager.ColorScheme = new ColorScheme(
                 Primary.Blue900, Primary.Blue900, Primary.Blue200, Accent.Blue700, TextShade.WHITE);
 
-            this.Text = "Exportar";
+            this.Text = "Exportar";// Titulo de la ventana
 
+            // Llenamos el combobox con las opciones
             cbOpcionesGrid.Items.Add("Tabla Principal (Filtros actuales)");
             cbOpcionesGrid.Items.Add("Tabla de Pendientes");
             cbOpcionesGrid.Items.Add("Historial Completo");
 
-            cbOpcionesGrid.SelectedIndex = 0;
+            cbOpcionesGrid.SelectedIndex = 0;// Por defecto seleccionamos la primera opción
         }
 
+        //--------------------------------------------------------------------------------
+        // BOTONES
+        //--------------------------------------------------------------------------------
         private void btAceptar_Click(object sender, EventArgs e)
         {
             // Ocultamos la ventanita mientras genera el Excel para que parezca más fluido
@@ -66,7 +70,9 @@ namespace Recordadora
             this.Close();
         }
 
-        // --- MÉTODOS PRIVADOS DE EXPORTACIÓN ---
+        // --------------------------------------------------------------------------------
+        // MÉTODOS
+        // --------------------------------------------------------------------------------
         private void ExportarGridAExcel(DataGridView grid, string nombreHoja)
         {
             if (grid.Rows.Count == 0)
