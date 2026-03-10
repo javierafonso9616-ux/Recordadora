@@ -63,6 +63,46 @@ namespace Recordadora.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap add_32dp_1F1F1F_FILL0_wght400_GRAD0_opsz40 {
+            get {
+                object obj = ResourceManager.GetObject("add_32dp_1F1F1F_FILL0_wght400_GRAD0_opsz40", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap delete_32dp_1F1F1F_FILL0_wght400_GRAD0_opsz40 {
+            get {
+                object obj = ResourceManager.GetObject("delete_32dp_1F1F1F_FILL0_wght400_GRAD0_opsz40", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap delete_32dp_1F1F1F_FILL0_wght400_GRAD0_opsz401 {
+            get {
+                object obj = ResourceManager.GetObject("delete_32dp_1F1F1F_FILL0_wght400_GRAD0_opsz401", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap filter_list_32dp_1F1F1F_FILL0_wght400_GRAD0_opsz40 {
+            get {
+                object obj = ResourceManager.GetObject("filter_list_32dp_1F1F1F_FILL0_wght400_GRAD0_opsz40", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap harry_potter {
             get {
                 object obj = ResourceManager.GetObject("harry-potter", resourceCulture);
@@ -73,9 +113,29 @@ namespace Recordadora.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_export_excel_32 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-export-excel-32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Logotipo_Cruz_Roja_Horizontal_transparente_letras_negras {
             get {
                 object obj = ResourceManager.GetObject("Logotipo Cruz Roja Horizontal transparente letras negras", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap search_32dp_1F1F1F_FILL0_wght400_GRAD0_opsz40 {
+            get {
+                object obj = ResourceManager.GetObject("search_32dp_1F1F1F_FILL0_wght400_GRAD0_opsz40", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
