@@ -72,7 +72,7 @@ namespace Recordadora
         // BOTONES
         //-------------------------------------------------------------------------
 
-        private void btnGuardar_Click(object sender, EventArgs e)
+        private void BtnGuardar_Click(object sender, EventArgs e)
         {
             // 1. Validación básica
             string estadoSeleccionado = cbEstado.SelectedItem?.ToString() ?? "(Seleccione un estado)";
@@ -141,7 +141,7 @@ namespace Recordadora
             this.Close();
         }
 
-        private void btEliminar_Click(object sender, EventArgs e)
+        private void BtEliminar_Click(object sender, EventArgs e)
         {
             // 1. Preguntamos al usuario si está seguro (Regla de oro de UX)
             DialogResult respuesta = MessageBox.Show(

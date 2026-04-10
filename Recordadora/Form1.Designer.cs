@@ -78,7 +78,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::Recordadora.Properties.Resources.filter_list_32dp_1F1F1F_FILL0_wght400_GRAD0_opsz40;
+            this.pictureBox1.Image = global::Notas.Properties.Resources.filter_list_32dp_1F1F1F_FILL0_wght400_GRAD0_opsz40;
             this.pictureBox1.Location = new System.Drawing.Point(1630, 70);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(37, 32);
@@ -91,7 +91,7 @@
             this.btExportarExcel.FlatAppearance.BorderSize = 0;
             this.btExportarExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btExportarExcel.ForeColor = System.Drawing.Color.White;
-            this.btExportarExcel.Image = global::Recordadora.Properties.Resources.icons8_export_excel_32;
+            this.btExportarExcel.Image = global::Notas.Properties.Resources.icons8_export_excel_32;
             this.btExportarExcel.Location = new System.Drawing.Point(1307, 54);
             this.btExportarExcel.Name = "btExportarExcel";
             this.btExportarExcel.Size = new System.Drawing.Size(62, 62);
@@ -124,7 +124,7 @@
             this.btAñadir.Depth = 0;
             this.btAñadir.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btAñadir.ForeColor = System.Drawing.Color.Blue;
-            this.btAñadir.Icon = global::Recordadora.Properties.Resources.add_32dp_1F1F1F_FILL0_wght400_GRAD0_opsz40;
+            this.btAñadir.Icon = global::Notas.Properties.Resources.add_32dp_1F1F1F_FILL0_wght400_GRAD0_opsz40;
             this.btAñadir.Location = new System.Drawing.Point(1235, 56);
             this.btAñadir.MouseState = MaterialSkin.MouseState.HOVER;
             this.btAñadir.Name = "btAñadir";
@@ -170,7 +170,7 @@
             this.txtBuscar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBuscar.HideSelection = true;
             this.txtBuscar.Hint = "BUSCAR";
-            this.txtBuscar.LeadingIcon = global::Recordadora.Properties.Resources.search_32dp_1F1F1F_FILL0_wght400_GRAD0_opsz40;
+            this.txtBuscar.LeadingIcon = global::Notas.Properties.Resources.search_32dp_1F1F1F_FILL0_wght400_GRAD0_opsz40;
             this.txtBuscar.Location = new System.Drawing.Point(633, 62);
             this.txtBuscar.MaxLength = 32767;
             this.txtBuscar.MouseState = MaterialSkin.MouseState.OUT;
@@ -195,7 +195,7 @@
             // 
             // pictureBoxLogo
             // 
-            this.pictureBoxLogo.Image = global::Recordadora.Properties.Resources.Logotipo_Cruz_Roja_Horizontal_transparente_letras_negras;
+            this.pictureBoxLogo.Image = global::Notas.Properties.Resources.Logotipo_Cruz_Roja_Horizontal_transparente_letras_negras;
             this.pictureBoxLogo.Location = new System.Drawing.Point(3, 3);
             this.pictureBoxLogo.Name = "pictureBoxLogo";
             this.pictureBoxLogo.Size = new System.Drawing.Size(578, 138);
@@ -304,7 +304,7 @@
             this.Name = "Form1";
             this.Padding = new System.Windows.Forms.Padding(3, 64, 6, 6);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Recordadora";
+            this.Text = "Notas";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
             this.materialCardMenu.ResumeLayout(false);

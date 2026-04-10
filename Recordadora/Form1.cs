@@ -56,6 +56,11 @@ namespace Recordadora
             );
             // FIN MATERIAL SKIN MANAGER
 
+            
+            
+              //  this.Icon = System.Drawing.Icon.ExtractAssociatedIcon(Application.ExecutablePath);
+            
+            
 
             // Maximizamos antes de mostrar para evitar saltos de resolución
             this.MaximizedBounds = Screen.PrimaryScreen.WorkingArea;
@@ -263,7 +268,7 @@ namespace Recordadora
                     }
                 }
 
-                Image iconoExcel = Properties.Resources.icons8_export_excel_32;
+                Image iconoExcel = Notas.Properties.Resources.icons8_export_excel_32;
                 if (iconoExcel != null)
                 {
                     int x = (anchoReal - iconoExcel.Width) / 2;

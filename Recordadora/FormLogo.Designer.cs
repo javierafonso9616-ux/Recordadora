@@ -34,7 +34,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::Recordadora.Properties.Resources.harry_potter;
+            this.pictureBox1.Image = global::Notas.Properties.Resources.harry_potter;
             this.pictureBox1.Location = new System.Drawing.Point(-3, 0);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(505, 285);

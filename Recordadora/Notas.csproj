@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{C2AA4709-10BC-4A3D-AEA0-08902A49BDE6}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Recordadora</RootNamespace>
-    <AssemblyName>Recordadora</AssemblyName>
+    <RootNamespace>Notas</RootNamespace>
+    <AssemblyName>Notas</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
